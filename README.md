@@ -5,6 +5,9 @@ First Person Game Kit for Unity 2020.3+
 
 * Unity 2020.3 or newer
 * HDRP or URP
+
+## Optional
+* Cinemachine
 * New Input System
 
 
