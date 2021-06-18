@@ -1,0 +1,7 @@
+{
+  "name": "net.peeweek.fpskit",
+  "displayName": "FPS Kit",
+  "version": "0.0.1-preview",
+  "unity": "2020.3",
+  "description": "Modular Kit for First Person Games"
+}
