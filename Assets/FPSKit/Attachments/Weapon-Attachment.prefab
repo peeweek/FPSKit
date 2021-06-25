@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2925594719883857501}
   - component: {fileID: 6669037289328823617}
   m_Layer: 0
-  m_Name: Blaster01-Attachment
+  m_Name: Weapon-Attachment
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

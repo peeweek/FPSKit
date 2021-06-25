@@ -16,7 +16,12 @@ public class BasicWeaponAttachment : LocomotionAttachment
     [SerializeField]
     protected float shootDelay = 0.17f;
 
+    [SerializeField]
+    protected bool canShootWhileDash = false;
+    [SerializeField]
+    protected bool canShootWhileJump = true;
 
+    [Header("Shoot Rumble")]
     [SerializeField]
     protected bool rumble;
     [SerializeField]
@@ -50,7 +55,12 @@ public class BasicWeaponAttachment : LocomotionAttachment
         m_ShootButtonControl = shootButton.controls[0] as ButtonControl;
 
         bool shoot = false;
-        if(m_ShootButtonControl != null && m_TTL > shootDelay)
+
+        if (m_ShootButtonControl != null
+            && m_TTL > shootDelay
+            && (controller.jump ? canShootWhileJump : true)
+            && (controller.dash ? canShootWhileDash : true)
+            )
         {
             if(continousShoot)
                 shoot = m_ShootButtonControl.isPressed;

@@ -89,7 +89,7 @@ MonoBehaviour:
   cameraPrefab: {fileID: 2633738878531622317, guid: b8b0fa467c613404da7d4fb5f336292b, type: 3}
   viewBobbing: 0
   viewBobbingScale: 0.05
-  jumpImpulseSpeed: 9
+  jumpImpulseSpeed: 12
   maxJumps: 2
   minDelayBetweenJumps: 0.35
   dashSpeed: 10.5

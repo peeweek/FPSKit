@@ -282,6 +282,8 @@ namespace FPSKit
 
         #region JUMP
 
+        public bool jump { get => m_Jump > 0; }
+
         int m_Jump;
         float m_JumpTTL;
 
@@ -307,6 +309,7 @@ namespace FPSKit
         #endregion
 
         #region DASH
+        public bool dash { get => m_Dash > 0.1f; }
 
         float m_Dash;
         float m_DashTTL;
