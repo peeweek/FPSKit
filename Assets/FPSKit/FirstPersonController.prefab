@@ -94,13 +94,16 @@ MonoBehaviour:
   minDelayBetweenJumps: 0.35
   dashSpeed: 10.5
   dashTransitionSpeed: 7
+  dashForwardThreshold: 0.8
   dashFOV: 80
   dashDuration: -1
   toggleCrouch: 1
   crouchHeight: 0.9
   crouchMoveSpeed: 2.9
   crouchTransitionSpeed: 15
-  drawDebug: 1
+  initialAttachment: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+  initialAttachmentIndex: 0
+  drawDebug: 0
 --- !u!114 &5605719379376502520
 MonoBehaviour:
   m_ObjectHideFlags: 0

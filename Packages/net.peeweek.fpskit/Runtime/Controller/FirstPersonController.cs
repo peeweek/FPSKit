@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace FPSKit
@@ -95,6 +96,11 @@ namespace FPSKit
         [SerializeField]
         float crouchTransitionSpeed = 15f;
 
+        [Header("Attachments")]
+        [SerializeField]
+        Attachment initialAttachment;
+        [SerializeField]
+        int initialAttachmentIndex = 0;
 
         [Header("Debug")]
         [SerializeField]
@@ -105,6 +111,9 @@ namespace FPSKit
         CharacterController m_Character;
         FirstPersonCamera m_Camera;
 
+        Dictionary<int, Attachment> m_Attachments;
+        Attachment m_CurrentAttachment;
+
         private void Awake()
         {
             SyncComponents();
@@ -114,6 +123,13 @@ namespace FPSKit
                 this.enabled = false;
                 Debug.LogError("FirstPersonController : cannot create camera, aborting");
                 return;
+            }
+
+            m_Attachments = new Dictionary<int, Attachment>();
+
+            if (initialAttachment != null && TryAttach(initialAttachment, out Attachment attachment))
+            {
+                SetAttachment(attachment.index);
             }
         }
 
@@ -148,6 +164,9 @@ namespace FPSKit
             UpdateDash();
             UpdateMovement();
             UpdateCameraFov();
+
+            // If Attachment present, update it
+            m_CurrentAttachment?.OnUpdate(this);
 
             // Apply to character   
             m_Move = m_Movement + m_Forces;
@@ -205,7 +224,6 @@ namespace FPSKit
         #region BODY AND MOTION
 
         Vector3 m_Move;
-
         Vector3 m_Forces;
         float m_ForceMag;
 
@@ -214,7 +232,6 @@ namespace FPSKit
             // Apply Gravity
             m_Forces += Physics.gravity * gravityScale * Time.deltaTime;
 
-            
             // Apply Friction
             if (m_Character.isGrounded)
             {
@@ -231,6 +248,11 @@ namespace FPSKit
             }
         }
 
+        /// <summary>
+        /// Applies an impulse to the Character, with optional 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="replace"></param>
         void Impulse(Vector3 vector, bool replace)
         {
             if (replace)
@@ -378,6 +400,142 @@ namespace FPSKit
 
         #endregion
 
+        #region ATTACHMENTS
+
+        /// <summary>
+        /// Sets next attachment available, active (cycling)
+        /// </summary>
+        /// <returns>The success of the operation</returns>
+        public bool NextAttachment()
+        {
+            if (m_CurrentAttachment == null && m_Attachments != null && m_Attachments.Keys.Count > 1)
+                return false;
+
+            var keys = m_Attachments.Keys.OrderBy(index => index).ToList();
+            int index = (keys.IndexOf(m_CurrentAttachment.index) + 1) % keys.Count;
+            return SetAttachment(index);
+        }
+
+        /// <summary>
+        /// Sets previous attachment available, active (cycling)
+        /// </summary>
+        /// <returns>The success of the operation</returns>
+        public bool PreviousAttachment()
+        {
+            if (m_CurrentAttachment == null && m_Attachments != null && m_Attachments.Keys.Count > 1)
+                return false;
+
+            var keys = m_Attachments.Keys.OrderBy(index => index).ToList();
+            int index = (keys.IndexOf(m_CurrentAttachment.index) - 1) % keys.Count;
+            return SetAttachment(index);
+        }
+
+        /// <summary>
+        /// Enables the attachment at given index (if present)
+        /// </summary>
+        /// <param name="index"></param>
+        public bool SetAttachment(int index)
+        {
+            if (m_Attachments == null || !m_Attachments.ContainsKey(index))
+                return false;
+
+            foreach(var kvp in m_Attachments)
+            {
+                bool active = kvp.Value.gameObject.activeSelf;
+
+                if (kvp.Key == index)
+                {
+                    if(!active)
+                    {
+                        kvp.Value.gameObject.SetActive(true);
+                        kvp.Value.OnActive(this);
+                        m_CurrentAttachment = kvp.Value;
+                    }
+                }
+                else
+                {
+                    if(active)
+                    {
+                        kvp.Value.OnInactive(this);
+                        kvp.Value.gameObject.SetActive(false);
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        public bool Remove(int index)
+        {
+            if(m_Attachments != null && m_Attachments.ContainsKey(index))
+            {
+                if (m_Attachments[index] != null)
+                {
+                    var attachment = m_Attachments[index];
+                    m_Attachments.Remove(index);
+                    attachment.OnInactive(this);
+                    attachment.OnDetach(this);
+                    Destroy(attachment.gameObject);
+                    return true;
+                }      
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Tries attaching a referenceAttachment, and returns if it was successful
+        /// </summary>
+        /// <param name="referenceAttachment"></param>
+        /// <param name="newAttachment"></param>
+        /// <returns></returns>
+        internal bool TryAttach(Attachment referenceAttachment, out Attachment newAttachment, bool setActive = true)
+        {
+            newAttachment = null;
+
+            if (referenceAttachment == null)
+                return false;
+
+            // If attachment already present at index
+            if (m_Attachments.ContainsKey(referenceAttachment.index))
+            {
+                // Check if we can replace it
+                if(referenceAttachment.replacesWhenAttached)
+                    Remove(referenceAttachment.index);
+                else
+                    return false; // Or just fail
+            }
+
+            try
+            {
+                var go = Instantiate(referenceAttachment.gameObject);
+                go.SetActive(false);
+                go.name = referenceAttachment.gameObject.name;
+                go.transform.parent = m_CameraRoot;
+                go.transform.localPosition = Vector3.zero;
+                go.transform.localRotation = Quaternion.identity;
+                go.transform.localScale = Vector3.one;
+                newAttachment = go.GetComponent<Attachment>();
+                m_Attachments[newAttachment.index] = newAttachment;
+                newAttachment.OnAttach(this);
+
+                if (setActive)
+                    SetAttachment(newAttachment.index);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion
+
         #region DEBUG
 
         private void OnDrawGizmosSelected()
@@ -386,8 +544,6 @@ namespace FPSKit
             Gizmos.DrawFrustum(new Vector3(0,bodyHeight-viewHeightOffset,0), 40, 5, .01f, 1);
         }
 
-        #endregion
-
         void OnGUI()
         {
             if (!drawDebug)
@@ -395,16 +551,18 @@ namespace FPSKit
 
             System.Text.StringBuilder debugString = new System.Text.StringBuilder();
             debugString.AppendLine($"Position {transform.position} | Direction {transform.forward} ");
-            debugString.AppendLine($"Grounded : {m_Character.isGrounded} | Jumps : {m_Jump} | Crouch : {m_Crouch.ToString("F2")}" );
-            debugString.AppendLine($"Dash {m_Dash.ToString("F2")}| ForwardDot {m_ForwardDot.ToString("F2")} | TTL ({m_DashTTL.ToString("F2")}s.)" );
-            debugString.AppendLine($"Movement {m_Movement} | Speed : {m_Movement.magnitude.ToString("F2")} "); 
-            debugString.AppendLine($"Forces {m_Forces} | Forces Mag : {m_Forces.magnitude.ToString("F2")} "); 
+            debugString.AppendLine($"Grounded : {m_Character.isGrounded} | Jumps : {m_Jump} | Crouch : {m_Crouch.ToString("F2")}");
+            debugString.AppendLine($"Dash {m_Dash.ToString("F2")}| ForwardDot {m_ForwardDot.ToString("F2")} | TTL ({m_DashTTL.ToString("F2")}s.)");
+            debugString.AppendLine($"Movement {m_Movement} | Speed : {m_Movement.magnitude.ToString("F2")} ");
+            debugString.AppendLine($"Forces {m_Forces} | Forces Mag : {m_Forces.magnitude.ToString("F2")} ");
             debugString.AppendLine($"Character Velocity {m_Character.velocity} | Character Speed : {m_Character.velocity.magnitude.ToString("F2")} ");
             debugString.AppendLine($"Camera Pitch {m_Pitch.ToString("F2")} | Yaw {m_Yaw.ToString("F2")} | FOV {m_Camera.fov.ToString("F2")}");
 
             GUI.Box(new Rect(0, 0, 640, 300), "<b>Character Debug</b>");
             GUI.Label(new Rect(10, 24, 620, 364), debugString.ToString());
         }
+        #endregion
+
 
     }
 }
