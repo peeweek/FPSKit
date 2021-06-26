@@ -15,6 +15,9 @@ First Person Game Kit for Unity 2020.3+
   * Crouch
   * Jump (+ Multiple)
   * Sprint
+* Configurable Input
+  * Legacy/New Input System
+  * Pad Rumble on Shoot
 * Camera Rigs
   * Cinemachine
   * Standard Camera
