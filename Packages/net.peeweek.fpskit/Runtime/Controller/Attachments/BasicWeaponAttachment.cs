@@ -36,6 +36,9 @@ namespace FPSKit
         [SerializeField]
         protected Projectile projectile;
 
+        // Accessors
+        public Transform source { get => projectileSource; }
+
         // Private Fields
         float m_TTL;
         ButtonControl m_ShootButtonControl;
@@ -80,7 +83,7 @@ namespace FPSKit
                 m_TTL = 0;
                 animator.SetBool(animatorBoolShootProperty, true);
                 if (projectile != null && projectileSource != null)
-                    projectile.SpawnProjectile(this);
+                    projectile.Spawn(this);
             }
             else
                 animator.SetBool(animatorBoolShootProperty, false);

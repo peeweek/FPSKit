@@ -30,6 +30,22 @@ Transform:
   m_Father: {fileID: 5332363579440788552}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4903246121684662200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332363579440788555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2abbcd2a66afba54ca515fdf2eb312a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referencePrefab: {fileID: 8299187683165847004, guid: 8e9ae322299fe29448ef36fe53b29fb2, type: 3}
+  initialVelocity: {x: 0, y: 0, z: 12}
+  poolSize: 12
+  reapOldestInstance: 1
 --- !u!1001 &214256000146524273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 4903246121684662200}
     - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
       propertyPath: projectileSource
       value: 
@@ -216,6 +236,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+--- !u!1 &5332363579440788555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4857752377271853009, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+  m_PrefabInstance: {fileID: 678469458952809370}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5332363579440788552 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4857752377271853010, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
