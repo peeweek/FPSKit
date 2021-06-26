@@ -89,7 +89,7 @@ MonoBehaviour:
   cameraPrefab: {fileID: 2633738878531622317, guid: b8b0fa467c613404da7d4fb5f336292b, type: 3}
   viewBobbing: 0
   viewBobbingScale: 0.05
-  jumpImpulseSpeed: 12
+  jumpImpulseSpeed: 9
   maxJumps: 2
   minDelayBetweenJumps: 0.35
   dashSpeed: 10.5
@@ -101,7 +101,7 @@ MonoBehaviour:
   crouchHeight: 0.9
   crouchMoveSpeed: 2.9
   crouchTransitionSpeed: 15
-  initialAttachment: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+  initialAttachment: {fileID: 2446479915352778183, guid: babfd4b66a701414eb546122017d4c7d, type: 3}
   initialAttachmentIndex: 0
   drawDebug: 0
 --- !u!114 &5605719379376502520

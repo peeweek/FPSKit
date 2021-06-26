@@ -202,10 +202,10 @@ namespace FPSKit
             // If crouched but wants to get up...
             if (m_Crouch > 0.0f && !crouch)
             {
-                // Check if nothing blocks above our head
-                if (Physics.Raycast(transform.position + (transform.up * bodyHeight), transform.up, (bodyHeight - crouchHeight)))
+                // Check if nothing blocks above our head, so we can get up
+                if (Physics.Raycast(transform.position + (transform.up * crouchHeight), transform.up, (bodyHeight - crouchHeight)))
                 {
-                    // If blocked, Forbid getting up.
+                    // If not enough room, Forbid getting up
                     crouch = true;
                 }
             }
@@ -249,7 +249,7 @@ namespace FPSKit
         }
 
         /// <summary>
-        /// Applies an impulse to the Character, with optional 
+        /// Applies an impulse to the Character, and optionally replaces current speed;
         /// </summary>
         /// <param name="vector"></param>
         /// <param name="replace"></param>
@@ -302,7 +302,7 @@ namespace FPSKit
             {
                 m_Jump++;
                 m_JumpTTL = 0;
-                Impulse(new Vector3(0,jumpImpulseSpeed,0), false);
+                Impulse(new Vector3(0,jumpImpulseSpeed,0), true);
             }
         }
 
