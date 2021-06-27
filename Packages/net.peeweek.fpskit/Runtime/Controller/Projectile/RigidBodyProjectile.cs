@@ -10,6 +10,10 @@ namespace FPSKit
         [SerializeField]
         protected float explodeAfterDelay = 0;
 
+        [SerializeField]
+        Effect[] onCollideEffects;
+
+
         RigidBodyProjectileSpawner parent;
         int m_Collisions;
         float m_TTL;
@@ -39,6 +43,13 @@ namespace FPSKit
         private void OnCollisionEnter(Collision collision)
         {
             m_Collisions++;
+            foreach(var effect in onCollideEffects)
+            {
+                if (effect == null)
+                    continue;
+
+                effect.ApplyEffect(collision.contacts[0].point, collision.contacts[0].normal);
+            }
         }
 
         void Update()

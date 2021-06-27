@@ -22,6 +22,9 @@ namespace FPSKit
         [SerializeField]
         protected bool canShootWhileJump = true;
 
+        [SerializeField]
+        Effect[] effects;
+
         [Header("Shoot Rumble")]
         [SerializeField]
         protected bool rumble;
@@ -84,21 +87,32 @@ namespace FPSKit
                 animator.SetBool(animatorBoolShootProperty, true);
                 if (projectileSpawner != null && spawnerSource != null)
                 {
+                    Vector3 source = Vector3.zero;
+                    Vector3 target = Vector3.one;
+                    bool hasHit = false;
                     if(Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hit, projectileSpawner.maxDistance))
                     {
-                        Vector3 target = hit.point;
-                        // Modify Upwards Vector 
-                        target += transform.up * hit.distance * projectileSpawner.upwardsModifier;
-
-                        // Spawn towards target
-                        projectileSpawner.Spawn(spawnerSource.position, target, true);
+                        target = hit.point + transform.up * hit.distance * projectileSpawner.upwardsModifier;
+                        source = spawnerSource.position;
+                        hasHit = true;
                     }
                     else
-                    {   
-                        // Spawn forward
-                        projectileSpawner.Spawn(spawnerSource.position, spawnerSource.forward * projectileSpawner.maxDistance, true);
+                    {
+                        source = spawnerSource.position;
+                        target = source + spawnerSource.forward * projectileSpawner.maxDistance;
+                        hasHit = false;
                     }
 
+                    projectileSpawner.Spawn(source, target, hasHit);
+
+                    // Play Effects
+                    foreach(var effect in effects)
+                    {
+                        if (effect == null)
+                            continue;
+
+                        effect.ApplyEffect(source, target - source);
+                    }
 
                 }
                     
