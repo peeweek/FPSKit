@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8299187683165847007}
   - component: {fileID: 8299187683165847006}
   - component: {fileID: 8299187683165847005}
+  - component: {fileID: 7029239424181935874}
   m_Layer: 0
   m_Name: SphereProjectile
   m_TagString: Untagged
@@ -112,3 +113,17 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &7029239424181935874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8299187683165847004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536d6cf53c3f76a4fb3f46e3a203f1ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explodeOnCollide: 0
+  explodeAfterDelay: 5

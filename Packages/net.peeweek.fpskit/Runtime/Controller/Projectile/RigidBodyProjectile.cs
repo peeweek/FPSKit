@@ -1,108 +1,55 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FPSKit
 {
-    public class RigidBodyProjectile : Projectile
+    [RequireComponent(typeof(Rigidbody))]
+    public class RigidBodyProjectile : MonoBehaviour
     {
         [SerializeField]
-        GameObject referencePrefab;
+        protected int explodeOnCollide = 0;
         [SerializeField]
-        float initialSpeed = 12;
+        protected float explodeAfterDelay = 0;
 
-        [Header("Instance Pool")]
-        [Min(12)]
-        [SerializeField]
-        int poolSize = 12;
-        [SerializeField]
-        bool reapOldestInstance = false;
+        RigidBodyProjectileSpawner parent;
+        int m_Collisions;
+        float m_TTL;
 
-        // Private Fields
-        LinkedList<GameObject> m_Instances;
-        LinkedList<GameObject> m_AvailableInstances;
-
-        void InitializePool()
+        public void SetParent(RigidBodyProjectileSpawner parent)
         {
-            m_Instances = new LinkedList<GameObject>();
-            m_AvailableInstances = new LinkedList<GameObject>();
-
-            referencePrefab.SetActive(false);
-            for(int i = 0; i<poolSize; i++)
-            {
-                m_AvailableInstances.AddFirst(Instantiate(referencePrefab));
-            }
+            if (parent != null)
+                this.parent = parent;
         }
 
-        private void Awake()
+        public void Recycle()
         {
-            InitializePool();
+            parent?.Reap(this);
         }
 
-        private void OnDestroy()
+        public void Explode()
         {
-            if(m_Instances != null)
-                while(m_Instances.Count > 0)
-                {
-                    Destroy(m_Instances.First.Value);
-                    m_Instances.RemoveFirst();
-                }
-
-            if(m_AvailableInstances != null)
-                while (m_AvailableInstances.Count > 0)
-                {
-                    Destroy(m_AvailableInstances.First.Value);
-                    m_AvailableInstances.RemoveFirst();
-                }
+            Recycle();
         }
 
-        public override bool Spawn(BasicWeaponAttachment source)
+        private void OnEnable()
         {
-            if(m_AvailableInstances.Count == 0 && reapOldestInstance)
-                Reap();
-
-            if (m_AvailableInstances.Count == 0) // Still can't spawn
-                return false;
-            else
-            {
-                // Here we spawn!
-                GameObject go = m_AvailableInstances.First.Value;
-                m_AvailableInstances.RemoveFirst();
-                m_Instances.AddFirst(go);
-                RigidBodyProjectileInstance instance;
-
-                if(!go.TryGetComponent(out instance))
-                {
-                    instance = go.AddComponent<RigidBodyProjectileInstance>();
-                }
-
-                instance.parent = this;
-                go.SetActive(true);
-                go.transform.position = source.source.position;
-                go.GetComponent<Rigidbody>().velocity = source.source.forward * initialSpeed;
-
-            }
-            return true;
+            m_Collisions = 0;
+            m_TTL = 0;
         }
 
-        public void Reap(GameObject instance = null)
+        private void OnCollisionEnter(Collision collision)
         {
-            if(instance == null)
-            {
-                instance = m_Instances.Last.Value;
-                m_Instances.RemoveLast();
-            }
-            else
-            {
-                var node = m_Instances.Find(instance);
-                if (node == null)
-                {
-                    throw new System.Exception($"Could not find instance '{instance.name}' in projectile pool '{name}'");
-                }
-                m_Instances.Remove(node);
-            }
+            m_Collisions++;
+        }
 
-            m_AvailableInstances.AddFirst(instance);
+        void Update()
+        {
+            if (explodeOnCollide > 0 && m_Collisions >= explodeOnCollide)
+                Explode();
+
+            if (explodeAfterDelay > 0 && m_TTL > explodeAfterDelay)
+                Explode();
+
+            m_TTL += Time.deltaTime;
         }
     }
 }
-

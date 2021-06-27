@@ -5,13 +5,16 @@ namespace FPSKit
     /// <summary>
     /// The abstract representation of a projectile that can be spawned by any weapon
     /// </summary>
-    public abstract class Projectile : MonoBehaviour
+    public abstract class ProjectileSpawner : MonoBehaviour
     {
+        public float maxDistance = 50f;
+        public float upwardsModifier = 0.025f;
+
         /// <summary>
         /// Called upon shooting, game logic that spawns a projectile based on settings.
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public abstract bool Spawn(BasicWeaponAttachment source);
+        public abstract bool Spawn(Vector3 source, Vector3 target, bool hitTarget);
     }
 }

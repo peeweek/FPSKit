@@ -42,8 +42,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2abbcd2a66afba54ca515fdf2eb312a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistance: 50
+  upwardsModifier: 0.025
   referencePrefab: {fileID: 8299187683165847004, guid: 8e9ae322299fe29448ef36fe53b29fb2, type: 3}
-  initialVelocity: {x: 0, y: 0, z: 12}
+  initialSpeed: 32
   poolSize: 12
   reapOldestInstance: 1
 --- !u!1001 &214256000146524273
@@ -135,9 +137,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4903246121684662200}
     - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: spawnerSource
+      value: 
+      objectReference: {fileID: 8092666348462848303}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
       propertyPath: projectileSource
       value: 
       objectReference: {fileID: 8092666348462848303}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: projectileSpawner
+      value: 
+      objectReference: {fileID: 4903246121684662200}
     - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
       propertyPath: rumbleCurve.m_Curve.Array.size
       value: 2

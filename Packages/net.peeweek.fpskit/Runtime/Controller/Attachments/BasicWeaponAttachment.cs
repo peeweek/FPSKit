@@ -32,12 +32,12 @@ namespace FPSKit
 
         [Header("Projectile")]
         [SerializeField]
-        protected Transform projectileSource;
+        protected Transform spawnerSource;
         [SerializeField]
-        protected Projectile projectile;
+        protected ProjectileSpawner projectileSpawner;
 
         // Accessors
-        public Transform source { get => projectileSource; }
+        public Transform source { get => spawnerSource; }
 
         // Private Fields
         float m_TTL;
@@ -82,8 +82,26 @@ namespace FPSKit
             {
                 m_TTL = 0;
                 animator.SetBool(animatorBoolShootProperty, true);
-                if (projectile != null && projectileSource != null)
-                    projectile.Spawn(this);
+                if (projectileSpawner != null && spawnerSource != null)
+                {
+                    if(Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hit, projectileSpawner.maxDistance))
+                    {
+                        Vector3 target = hit.point;
+                        // Modify Upwards Vector 
+                        target += transform.up * hit.distance * projectileSpawner.upwardsModifier;
+
+                        // Spawn towards target
+                        projectileSpawner.Spawn(spawnerSource.position, target, true);
+                    }
+                    else
+                    {   
+                        // Spawn forward
+                        projectileSpawner.Spawn(spawnerSource.position, spawnerSource.forward * projectileSpawner.maxDistance, true);
+                    }
+
+
+                }
+                    
             }
             else
                 animator.SetBool(animatorBoolShootProperty, false);
