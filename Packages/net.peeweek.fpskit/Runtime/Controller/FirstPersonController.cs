@@ -96,6 +96,10 @@ namespace FPSKit
         [SerializeField]
         float crouchTransitionSpeed = 15f;
 
+        [Header("Audio")]
+        public PlayAudioEffect foleyEffect;
+        public Vector2 foleyMinMaxStepDistance = new Vector2(2.5f,3.1f);
+
         [Header("Attachments")]
         [SerializeField]
         Attachment initialAttachment;
@@ -267,6 +271,7 @@ namespace FPSKit
 
         Vector3 m_Movement;
         float m_ForwardDot;
+        float m_NextFoley;
 
         void UpdateMovement()
         {
@@ -276,6 +281,16 @@ namespace FPSKit
             m_Movement = transform.forward * move.y;
             m_Movement += transform.right * move.x;
             m_Movement *= Mathf.Lerp(Mathf.Lerp(moveSpeed, crouchMoveSpeed, m_Crouch), dashSpeed, m_Dash);
+
+            // Update Foley
+            if(m_NextFoley <= 0)
+            {
+                m_NextFoley = UnityEngine.Random.Range(foleyMinMaxStepDistance.x, foleyMinMaxStepDistance.y);
+                foleyEffect?.ApplyEffect(transform.position, Vector3.up);
+            }
+
+            Debug.Log($"Step : {m_NextFoley}");
+            m_NextFoley -= m_Movement.magnitude * Time.deltaTime;
         }
 
         #endregion
