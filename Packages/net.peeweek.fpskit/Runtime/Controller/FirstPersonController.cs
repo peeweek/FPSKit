@@ -47,7 +47,9 @@ namespace FPSKit
         [SerializeField]
         float groundFriction = 5.7f;
         [SerializeField]
-        float slopeSlide = 16.1f;
+        AnimationCurve slopeSlide = AnimationCurve.EaseInOut(0,0,1,1);
+        [SerializeField]
+        float slopeSlideScale = 14f;
 
         [Header("Look")]
         [SerializeField]
@@ -259,8 +261,29 @@ namespace FPSKit
         Vector3 m_Forces;
         float m_ForceMag;
 
+        bool sliding { get => m_Sliding > 0; }
+        Vector3 m_SlopeNormal;
+        float m_Sliding;
+        RaycastHit m_SlopeHit;
+
         void UpdateGravityAndMomentum()
         {
+            // Compute Slope Normal + Distance
+            if(m_Character.isGrounded && Physics.Raycast(new Ray(transform.position, new Vector3(0, -1, 0)), out m_SlopeHit, 2))
+            {
+                // TODO: Compute correct slope sliding vector
+                m_SlopeNormal = m_SlopeHit.normal;
+                m_Sliding = slopeSlide.Evaluate(1f - Mathf.Clamp01(Vector3.Dot(m_SlopeNormal, Vector3.up))) * slopeSlideScale;
+                var slide = m_SlopeNormal;
+                slide.Scale(new Vector3(1, 0, 1));
+                m_Forces += slide * m_Sliding * Time.deltaTime;
+            }
+            else
+            {
+                m_Sliding = -1;
+                m_SlopeNormal = Vector3.zero;
+            }
+
             // Apply Gravity
             m_Forces += Physics.gravity * gravityScale * Time.deltaTime;
 
@@ -379,7 +402,7 @@ namespace FPSKit
 
             ButtonState jumpBtn = input.jump;
 
-            bool jump = (CanJump && !aim && jumpBtn == ButtonState.JustPressed && (m_Jump < maxJumps || maxJumps <= 0) && m_JumpTTL >= minDelayBetweenJumps);
+            bool jump = (CanJump && !aim && !sliding && jumpBtn == ButtonState.JustPressed && (m_Jump < maxJumps || maxJumps <= 0) && m_JumpTTL >= minDelayBetweenJumps);
 
             if(jump)
             {

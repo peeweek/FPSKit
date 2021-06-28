@@ -2178,6 +2178,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonController
       objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: drawDebug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: slopeSlide.m_Curve.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: slopeSlide.m_Curve.Array.data[2].time
+      value: 0.46513507
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: slopeSlide.m_Curve.Array.data[3].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: slopeSlide.m_Curve.Array.data[2].value
+      value: 0.83483714
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: slopeSlide.m_Curve.Array.data[3].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: slopeSlide.m_Curve.Array.data[2].inSlope
+      value: 0.9726772
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: slopeSlide.m_Curve.Array.data[2].outSlope
+      value: 0.9726772
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: slopeSlide.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: slopeSlide.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 5605719379376502523, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
       propertyPath: m_RootOrder
       value: 2
