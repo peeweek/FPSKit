@@ -20,6 +20,8 @@ namespace FPSKit
 
         public InputAction crouchButton;
 
+        public InputAction aimButton;
+
         public InputAction primaryActionButton;
 
         public InputAction secondaryActionButton;
@@ -37,6 +39,8 @@ namespace FPSKit
 
         public override ButtonState crouch => GetButton(crouchButton);
 
+        public override ButtonState aim => GetButton(aimButton);
+
         public override ButtonState primaryAction => GetButton(primaryActionButton);
 
         public override ButtonState secondaryAction => GetButton(secondaryActionButton);
@@ -53,6 +57,9 @@ namespace FPSKit
         {
             if (!enabled)
                 return ButtonState.Released;
+
+            if (!buttonAction.enabled)
+                buttonAction.Enable();
 
             var control = buttonAction.activeControl as ButtonControl;
 

@@ -2178,14 +2178,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonController
       objectReference: {fileID: 0}
-    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
-      propertyPath: viewBobbingCurve.m_Curve.Array.data[1].value
-      value: 0.05867217
-      objectReference: {fileID: 0}
-    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
-      propertyPath: viewBobbingCurve.m_Curve.Array.data[2].value
-      value: -0.053830497
-      objectReference: {fileID: 0}
     - target: {fileID: 5605719379376502523, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
       propertyPath: m_RootOrder
       value: 2

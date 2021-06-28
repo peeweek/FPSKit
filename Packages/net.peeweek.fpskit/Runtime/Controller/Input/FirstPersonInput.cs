@@ -20,6 +20,7 @@ namespace FPSKit
         public abstract ButtonState jump { get; }
         public abstract ButtonState dash { get; }
         public abstract ButtonState crouch { get; }
+        public abstract ButtonState aim { get; }
         public abstract ButtonState primaryAction { get; }
         public abstract ButtonState secondaryAction { get; }
         public abstract ButtonState tertiaryAction { get; }

@@ -558,6 +558,7 @@ MonoBehaviour:
   CanJump: 1
   CanDash: 1
   CanCrouch: 1
+  CanAim: 1
   input: {fileID: 5605719379376502520}
   skinWidth: 0.08
   bodyRadius: 0.4
@@ -591,7 +592,7 @@ MonoBehaviour:
       outWeight: 0.37186918
     - serializedVersion: 3
       time: 0.9084539
-      value: 0.034131188
+      value: 0.05867217
       inSlope: 0.014857521
       outSlope: 0.014857521
       tangentMode: 0
@@ -600,7 +601,7 @@ MonoBehaviour:
       outWeight: 0.27967808
     - serializedVersion: 3
       time: 1.9328022
-      value: -0.041888908
+      value: -0.053830497
       inSlope: 0.039404497
       outSlope: 0.039404497
       tangentMode: 0
@@ -619,6 +620,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 1
     m_RotationOrder: 4
+  toggleAim: 1
+  aimFOV: 50
+  aimTransitionSpeed: 5
   jumpImpulseSpeed: 9
   maxJumps: 2
   minDelayBetweenJumps: 0.35
@@ -802,6 +806,30 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Crouch Button
+      m_Flags: 0
+  aimButton:
+    m_Name: Aim Button
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 4fae8923-690c-4537-a5f6-62c050a99f0b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: f7efc6ac-1da7-4286-ba2b-b8576314792a
+      m_Path: <Gamepad>/rightStickPress
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim Button
+      m_Flags: 0
+    - m_Name: 
+      m_Id: db735d1b-7b54-45f5-9ac6-c6fad16700ed
+      m_Path: <Mouse>/middleButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim Button
       m_Flags: 0
   primaryActionButton:
     m_Name: Primary Action Button

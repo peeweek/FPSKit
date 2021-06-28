@@ -8,13 +8,14 @@ namespace FPSKit
     [RequireComponent(typeof(CharacterController))]
     public class FirstPersonController : MonoBehaviour
     {
-        [Header("Features")]
         public bool Paused = false;
+        [Header("Features")]
         public bool CanMove = true;
         public bool CanLook = true;
         public bool CanJump = true;
         public bool CanDash = true;
         public bool CanCrouch = true;
+        public bool CanAim = true;
 
 
         [Header("Input")]
@@ -65,6 +66,14 @@ namespace FPSKit
         bool viewBobbing = false;
         [SerializeField]
         AnimationCurve viewBobbingCurve;
+
+        [Header("Aim")]
+        [SerializeField]
+        bool toggleAim = true;
+        [SerializeField]
+        float aimFOV = 50f;
+        [SerializeField]
+        float aimTransitionSpeed = 5f;
 
         [Header("Jump")]
         [SerializeField]
@@ -181,6 +190,7 @@ namespace FPSKit
             UpdateCrouch();
             UpdateGravityAndMomentum();
             UpdateCameraRotation();
+            UpdateAim();
             UpdateJump();
             UpdateDash();
             UpdateMovement();
@@ -324,6 +334,29 @@ namespace FPSKit
 
         #endregion
 
+        #region AIM
+        public bool aim { get => m_Aim; }
+        bool m_Aim;
+        float m_AimBlend;
+
+        void UpdateAim()
+        {
+            if (toggleAim)
+            {
+                if(input.aim == ButtonState.JustPressed)
+                    m_Aim = !m_Aim;
+            }
+            else
+            {
+                m_Aim = (input.aim == ButtonState.JustPressed || input.aim == ButtonState.Pressed);
+            }
+
+            m_AimBlend = Mathf.Clamp01(m_AimBlend + Time.deltaTime * aimTransitionSpeed * (m_Aim ? 1 : -1));
+        }
+
+
+        #endregion
+
         #region JUMP
 
         public bool jump { get => m_Jump > 0; }
@@ -346,7 +379,7 @@ namespace FPSKit
 
             ButtonState jumpBtn = input.jump;
 
-            bool jump = (CanJump && jumpBtn == ButtonState.JustPressed && (m_Jump < maxJumps || maxJumps <= 0) && m_JumpTTL >= minDelayBetweenJumps);
+            bool jump = (CanJump && !aim && jumpBtn == ButtonState.JustPressed && (m_Jump < maxJumps || maxJumps <= 0) && m_JumpTTL >= minDelayBetweenJumps);
 
             if(jump)
             {
@@ -368,7 +401,7 @@ namespace FPSKit
         void UpdateDash()
         {
             ButtonState dashBtn = input.dash;
-            bool dash = CanDash && m_Crouch == 0 && m_ForwardDot > dashForwardThreshold && (dashBtn == ButtonState.JustPressed || dashBtn == ButtonState.Pressed);
+            bool dash = CanDash && !aim && m_Crouch == 0 && m_ForwardDot > dashForwardThreshold && (dashBtn == ButtonState.JustPressed || dashBtn == ButtonState.Pressed);
 
             if(dash)
             {
@@ -486,7 +519,7 @@ namespace FPSKit
 
         void UpdateCameraFov()
         {
-            m_Camera.fov = Mathf.Lerp(baseFieldOfView, dashFOV, m_Dash);
+            m_Camera.fov = Mathf.Lerp(Mathf.Lerp(baseFieldOfView, dashFOV, m_Dash), aimFOV, m_AimBlend);
         }
 
         #endregion
