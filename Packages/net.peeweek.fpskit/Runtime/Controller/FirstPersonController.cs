@@ -705,8 +705,8 @@ namespace FPSKit
             debugString.AppendLine($"Character Velocity {m_Character.velocity} | Character Speed : {m_Character.velocity.magnitude.ToString("F2")} ");
             debugString.AppendLine($"Camera Pitch {m_Pitch.ToString("F2")} | Yaw {m_Yaw.ToString("F2")} | FOV {m_Camera.fov.ToString("F2")}");
 
-            GUI.Box(new Rect(0, 0, 640, 300), "<b>Character Debug</b>");
-            GUI.Label(new Rect(10, 24, 620, 364), debugString.ToString());
+            GUI.Box(new Rect(32, 32, 420, 180), "<b>Character Debug</b>");
+            GUI.Label(new Rect(42, 56, 420, 180), debugString.ToString());
         }
         #endregion
 

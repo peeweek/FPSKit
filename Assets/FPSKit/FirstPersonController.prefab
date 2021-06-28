@@ -443,7 +443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4195699656202047160}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.253948, y: 1.7051076, z: 3.785914}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1062914636139389606}
@@ -664,7 +664,7 @@ MonoBehaviour:
   dashForwardThreshold: 0.8
   dashFOV: 80
   dashDuration: -1
-  toggleCrouch: 1
+  toggleCrouch: 0
   crouchHeight: 0.9
   crouchMoveSpeed: 2.9
   crouchTransitionSpeed: 15
