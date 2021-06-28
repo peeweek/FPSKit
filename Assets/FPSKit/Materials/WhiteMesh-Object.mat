@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: WhiteMesh-Object
   m_Shader: {fileID: -6465566751694194690, guid: 07baf2e4dc3b7b041a594a045c990bd9, type: 3}
-  m_ShaderKeywords: PROJECTION_WORLD _DISABLE_SSR_TRANSPARENT
+  m_ShaderKeywords: PROJECTION_OBJECT _DISABLE_SSR_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -94,7 +94,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - CheckerboardSize: 0.5
-    - PROJECTION: 0
+    - PROJECTION: 1
     - SPACE: 1
     - Smoothness_1: 0.387
     - Smoothness_2: 0
@@ -169,8 +169,8 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_1: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
-    - Color_2: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+    - Color_1: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+    - Color_2: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
     - MinMaxFadeDistance: {r: 5, g: 50, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

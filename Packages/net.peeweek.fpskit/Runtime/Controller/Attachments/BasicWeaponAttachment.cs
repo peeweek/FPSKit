@@ -7,8 +7,6 @@ namespace FPSKit
     public class BasicWeaponAttachment : LocomotionAttachment
     {
         [Header("Basic Weapon Attachment")]
-        [SerializeField]
-        protected InputAction shootButton;
 
         [SerializeField]
         protected string animatorBoolShootProperty = "Shoot";
@@ -24,6 +22,14 @@ namespace FPSKit
 
         [SerializeField]
         Effect[] effects;
+
+        [Header("Recoil")]
+        [SerializeField]
+        bool recoil = false;
+        [SerializeField]
+        Vector2 recoilPitchMinMax = new Vector2(1.0f,1.5f);
+        [SerializeField]
+        float recoilYawJitter = 1.0f;
 
         [Header("Shoot Rumble")]
         [SerializeField]
@@ -44,19 +50,16 @@ namespace FPSKit
 
         // Private Fields
         float m_TTL;
-        ButtonControl m_ShootButtonControl;
 
         public override void OnActive(FirstPersonController controller)
         {
             base.OnActive(controller);
-            shootButton.Enable();
             m_TTL = shootDelay;
         }
 
         public override void OnInactive(FirstPersonController controller)
         {
             base.OnInactive(controller);
-            shootButton.Disable();
         }
 
         public override void OnUpdate(FirstPersonController controller)
@@ -65,20 +68,19 @@ namespace FPSKit
 
             m_TTL += Time.deltaTime;
 
-            m_ShootButtonControl = shootButton.controls[0] as ButtonControl;
+            ButtonState buttonState = controller.input.primaryAction;
 
             bool shoot = false;
 
-            if (m_ShootButtonControl != null
-                && m_TTL > shootDelay
+            if (m_TTL > shootDelay
                 && (controller.jump ? canShootWhileJump : true)
                 && (controller.dash ? canShootWhileDash : true)
                 )
             {
                 if (continousShoot)
-                    shoot = m_ShootButtonControl.isPressed;
+                    shoot = buttonState == ButtonState.JustPressed || buttonState == ButtonState.Pressed;
                 else
-                    shoot = m_ShootButtonControl.wasPressedThisFrame;
+                    shoot = buttonState == ButtonState.JustPressed;
             }
 
             if (shoot)
@@ -114,6 +116,13 @@ namespace FPSKit
                         effect.ApplyEffect(source, target - source);
                     }
 
+                    if(recoil)
+                    {
+                        Vector2 recoil = new Vector2(
+                            -Random.Range(recoilPitchMinMax.x, recoilPitchMinMax.y),
+                            Random.Range(-.5f, .5f) * recoilYawJitter);
+                        controller.Recoil(recoil);
+                    }
                 }
                     
             }
@@ -122,7 +131,8 @@ namespace FPSKit
 
             if (rumble)
             {
-                var gamepad = m_ShootButtonControl.device as Gamepad;
+                var gamepad = Gamepad.current;
+
                 if (gamepad != null)
                 {
                     if (m_TTL > rumbleCurve.keys[rumbleCurve.length - 1].time)

@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 8765371978628956710}
+  instantiateWhenOverlapping: 0
   audioClips:
   - {fileID: 8300000, guid: 67d21a6220f37c74b92e439d739857a2, type: 3}
   - {fileID: 8300000, guid: 5ac53bb7308ff0841a85394b430ae9a3, type: 3}
@@ -413,9 +414,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: recoil
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
       propertyPath: projectile
       value: 
       objectReference: {fileID: 4903246121684662200}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: recoilPitch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
       propertyPath: spawnerSource
       value: 
@@ -430,6 +439,18 @@ PrefabInstance:
       objectReference: {fileID: 4903246121684662200}
     - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
       propertyPath: effects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: recoilRandomJitter.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: recoilRandomJitter.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: recoilRandomJitter.z
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
@@ -487,6 +508,22 @@ PrefabInstance:
     - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
       propertyPath: rumbleCurve.m_Curve.Array.data[1].outWeight
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: shootButton.m_SingletonActionBindings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: shootButton.m_SingletonActionBindings.Array.data[1].m_Id
+      value: ea320426-e938-4ec6-8b3b-d9501f8b57cb
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: shootButton.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <Mouse>/leftButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: shootButton.m_SingletonActionBindings.Array.data[1].m_Action
+      value: Shoot Button
       objectReference: {fileID: 0}
     - target: {fileID: 4857752377271853009, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
       propertyPath: m_Name

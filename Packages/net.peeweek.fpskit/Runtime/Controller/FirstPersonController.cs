@@ -64,7 +64,7 @@ namespace FPSKit
         [SerializeField]
         bool viewBobbing = false;
         [SerializeField]
-        float viewBobbingScale = .05f;
+        AnimationCurve viewBobbingCurve;
 
         [Header("Jump")]
         [SerializeField]
@@ -97,8 +97,16 @@ namespace FPSKit
         float crouchTransitionSpeed = 15f;
 
         [Header("Audio")]
-        public PlayAudioEffect foleyEffect;
-        public Vector2 foleyMinMaxStepDistance = new Vector2(2.5f,3.1f);
+        [SerializeField]
+        PlayAudioEffect foleyEffect;
+        [SerializeField]
+        Vector2 foleyMinMaxStepDistance = new Vector2(2.5f,3.1f);
+        [SerializeField]
+        float foleyFirstStepDistance = 1.0f;
+        [SerializeField]
+        PlayAudioEffect jumpEffect;
+        [SerializeField]
+        PlayAudioEffect jumpLandEffect;
 
         [Header("Attachments")]
         [SerializeField]
@@ -159,7 +167,16 @@ namespace FPSKit
         private void LateUpdate()
         {
             if (Paused)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 return;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
 
             UpdateCrouch();
             UpdateGravityAndMomentum();
@@ -168,6 +185,7 @@ namespace FPSKit
             UpdateDash();
             UpdateMovement();
             UpdateCameraFov();
+            UpdateViewBobbing();
 
             // If Attachment present, update it
             m_CurrentAttachment?.OnUpdate(this);
@@ -269,6 +287,8 @@ namespace FPSKit
 
         #region MOVEMENT
 
+        public float speed { get => m_Movement.magnitude; }
+
         Vector3 m_Movement;
         float m_ForwardDot;
         float m_NextFoley;
@@ -282,16 +302,23 @@ namespace FPSKit
             m_Movement += transform.right * move.x;
             m_Movement *= Mathf.Lerp(Mathf.Lerp(moveSpeed, crouchMoveSpeed, m_Crouch), dashSpeed, m_Dash);
 
-            if(foleyEffect != null)
+            if (foleyEffect != null)
             {
-                // Update Foley
-                if (m_NextFoley <= 0)
+                if (m_Character.isGrounded && m_Movement.sqrMagnitude > 0) // If moving
                 {
-                    m_NextFoley = UnityEngine.Random.Range(foleyMinMaxStepDistance.x, foleyMinMaxStepDistance.y);
-                    foleyEffect?.ApplyEffect(transform.position, Vector3.up);
-                }
+                    // Update Foley
+                    if (m_NextFoley <= 0)
+                    {
+                        m_NextFoley = UnityEngine.Random.Range(foleyMinMaxStepDistance.x, foleyMinMaxStepDistance.y);
+                        foleyEffect?.ApplyEffect(transform.position, Vector3.up);
+                    }
 
-                m_NextFoley -= m_Movement.magnitude * Time.deltaTime;
+                    m_NextFoley -= m_Movement.magnitude * Time.deltaTime;
+                }
+                else // Standing Still
+                {
+                    m_NextFoley = foleyFirstStepDistance;
+                }
             }
         }
 
@@ -307,7 +334,13 @@ namespace FPSKit
         void UpdateJump()
         {
             if (m_Character.isGrounded)
-                m_Jump = 0;
+            {
+                if(m_Jump > 0) // Handle Landing
+                {
+                    m_Jump = 0;
+                    jumpLandEffect?.ApplyEffect(transform.position, Vector3.up);
+                }
+            }
 
             m_JumpTTL += Time.deltaTime;
 
@@ -320,6 +353,7 @@ namespace FPSKit
                 m_Jump++;
                 m_JumpTTL = 0;
                 Impulse(new Vector3(0,jumpImpulseSpeed,0), true);
+                jumpEffect?.ApplyEffect(transform.position, Vector3.up);
             }
         }
 
@@ -395,7 +429,16 @@ namespace FPSKit
 
         float m_Yaw;
         float m_Pitch;
+        Vector2 m_Recoil;
 
+        public void Recoil(Vector2 recoil)
+        {
+            m_Recoil += recoil;
+        }
+
+        /// <summary>
+        /// Updates player Rotation for Yaw , Camera Root pitch, and applies optional recoil
+        /// </summary>
         void UpdateCameraRotation()
         {
             Vector2 look = input.look;
@@ -403,14 +446,42 @@ namespace FPSKit
             // Turn : Applied to body
             m_Yaw = transform.localEulerAngles.y;
             float yawOffset = look.x * turnSpeed * Time.deltaTime;
-            transform.Rotate(new Vector3(0, yawOffset, 0));
+            transform.Rotate(new Vector3(0, yawOffset + m_Recoil.y, 0));
 
             // Pitch : Applied to Camera Root
             m_Pitch = m_CameraRoot.localEulerAngles.x;
             m_Pitch = m_Pitch < 180 ? m_Pitch : m_Pitch - 360;
             m_Pitch -= look.y * pitchSpeed * Time.deltaTime;
             m_Pitch = Mathf.Clamp(m_Pitch, minMaxPitch.x, minMaxPitch.y);
-            m_CameraRoot.localEulerAngles = new Vector3(m_Pitch, 0, 0);
+            m_CameraRoot.localEulerAngles = new Vector3(m_Pitch + m_Recoil.x, 0, 0);
+
+            if (m_Recoil.sqrMagnitude > 0)
+                m_Recoil = Vector3.zero;
+        }
+
+        float m_ViewBob;
+        float m_ViewBobTime;
+
+        void UpdateViewBobbing()
+        {
+            if (viewBobbing)
+            {
+                if (speed > 0)
+                {
+                    m_ViewBob = Mathf.Clamp01(m_ViewBob + Time.deltaTime * 4);
+                    m_ViewBobTime +=  speed * Time.deltaTime;
+                }
+                else
+                {
+                    m_ViewBob = Mathf.Clamp01(m_ViewBob - Time.deltaTime * 12);
+                }
+
+                if (m_ViewBob == 0)
+                    m_ViewBobTime = 0;
+
+                float b = viewBobbingCurve.Evaluate(m_ViewBobTime);
+                m_CameraRoot.localPosition += new Vector3(0, b * m_ViewBob, 0);
+            }
         }
 
         void UpdateCameraFov()
