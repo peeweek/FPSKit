@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 8721555297627511100}
+  instantiateWhenOverlapping: 0
   audioClips:
   - {fileID: 8300000, guid: d18ac0b230bf94642bcc16669cc9d45d, type: 3}
   - {fileID: 8300000, guid: dc4768d4389c5494f86af9f6f5e33f3f, type: 3}
@@ -342,7 +343,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 0b32b08b5fd921942a323032d6cb1926, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
