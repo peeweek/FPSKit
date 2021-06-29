@@ -76,6 +76,8 @@ namespace FPSKit
         float aimFOV = 50f;
         [SerializeField]
         float aimTransitionSpeed = 5f;
+        [SerializeField]
+        float recoilSmoothSpeed = 15f;
 
         [Header("Jump")]
         [SerializeField]
@@ -527,20 +529,27 @@ namespace FPSKit
         {
             Vector2 look = input.look;
 
+            // Proportion of recoil to apply this frame
+            float recoilV = Mathf.Clamp01(recoilSmoothSpeed * Time.deltaTime);
+
             // Turn : Applied to body
             m_Yaw = transform.localEulerAngles.y;
             float yawOffset = look.x * turnSpeed * Time.deltaTime;
-            transform.Rotate(new Vector3(0, yawOffset + m_Recoil.y, 0));
+            transform.Rotate(new Vector3(0, yawOffset + m_Recoil.y * recoilV, 0));
 
             // Pitch : Applied to Camera Root
             m_Pitch = m_CameraRoot.localEulerAngles.x;
             m_Pitch = m_Pitch < 180 ? m_Pitch : m_Pitch - 360;
             m_Pitch -= look.y * pitchSpeed * Time.deltaTime;
             m_Pitch = Mathf.Clamp(m_Pitch, minMaxPitch.x, minMaxPitch.y);
-            m_CameraRoot.localEulerAngles = new Vector3(m_Pitch + m_Recoil.x, 0, 0);
+            m_CameraRoot.localEulerAngles = new Vector3(m_Pitch + m_Recoil.x * recoilV, 0, 0);
 
+
+            // Diminish recoil
             if (m_Recoil.sqrMagnitude > 0)
-                m_Recoil = Vector3.zero;
+            {
+                m_Recoil *= 1f - recoilV;
+            }
         }
 
         float m_ViewBob;

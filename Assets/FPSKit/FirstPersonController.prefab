@@ -624,6 +624,7 @@ MonoBehaviour:
   toggleAim: 1
   aimFOV: 50
   aimTransitionSpeed: 5
+  recoilSmoothSpeed: 50
   jumpImpulseSpeed: 9
   maxJumps: 2
   minDelayBetweenJumps: 0.35
