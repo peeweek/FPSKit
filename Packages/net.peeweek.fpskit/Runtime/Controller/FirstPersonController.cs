@@ -47,7 +47,7 @@ namespace FPSKit
         [SerializeField]
         float groundFriction = 5.7f;
         [SerializeField]
-        AnimationCurve slopeSlide = AnimationCurve.EaseInOut(0,0,1,1);
+        float slopeSlideAngleThredhold = 60f;
         [SerializeField]
         float slopeSlideScale = 14f;
 
@@ -261,9 +261,9 @@ namespace FPSKit
         Vector3 m_Forces;
         float m_ForceMag;
 
-        bool sliding { get => m_Sliding > 0; }
+        bool sliding { get => m_Sliding; }
         Vector3 m_SlopeNormal;
-        float m_Sliding;
+        bool m_Sliding;
         RaycastHit m_SlopeHit;
 
         void UpdateGravityAndMomentum()
@@ -273,29 +273,41 @@ namespace FPSKit
             {
                 // TODO: Compute correct slope sliding vector
                 m_SlopeNormal = m_SlopeHit.normal;
-                m_Sliding = slopeSlide.Evaluate(1f - Mathf.Clamp01(Vector3.Dot(m_SlopeNormal, Vector3.up))) * slopeSlideScale;
-                var slide = m_SlopeNormal;
-                slide.Scale(new Vector3(1, 0, 1));
-                m_Forces += slide * m_Sliding * Time.deltaTime;
+
+                Vector3 p = m_SlopeNormal;
+                p.Scale(new Vector3(1, 0, 1));
+                Vector3 slopeDir = Vector3.Cross(Vector3.Cross(m_SlopeNormal, p).normalized, m_SlopeNormal);
+
+                float dot = Vector3.Dot(m_SlopeNormal, Vector3.up);
+                float slopeAngle = Mathf.Rad2Deg * Mathf.Acos(dot);
+
+                m_Sliding = slopeAngle > slopeSlideAngleThredhold;
+
+                if(m_Sliding)
+                {
+                    m_Forces += slopeSlideScale * slopeDir * Time.deltaTime;
+                }
             }
             else
             {
-                m_Sliding = -1;
-                m_SlopeNormal = Vector3.zero;
+                m_Sliding = false;
+                m_SlopeNormal = Vector3.up;
             }
 
-            // Apply Gravity
-            m_Forces += Physics.gravity * gravityScale * Time.deltaTime;
 
             // Apply Friction
             if (m_Character.isGrounded)
             {
                 m_Forces *= (1.0f - (groundFriction * Time.deltaTime));
-            }
+            } 
 
-            m_ForceMag = m_Forces.magnitude;
+            // Apply Gravity
+            m_Forces += Physics.gravity * gravityScale * Time.deltaTime;
+
 
             // Apply Terminal Velocity Clamp
+            m_ForceMag = m_Forces.magnitude;
+
             if (m_ForceMag > terminalSpeed)
             {
                 m_ForceMag = terminalSpeed;
@@ -322,17 +334,27 @@ namespace FPSKit
 
         public float speed { get => m_Movement.magnitude; }
 
+        public Vector3 forward { get => m_Forward; }
+        public Vector3 right { get => m_Right; }
+
         Vector3 m_Movement;
         float m_ForwardDot;
         float m_NextFoley;
+
+        Vector3 m_Forward;
+        Vector3 m_Right;
 
         void UpdateMovement()
         {
             Vector2 move = input.move;
             m_ForwardDot = Vector2.Dot(move, Vector2.up);
 
-            m_Movement = transform.forward * move.y;
-            m_Movement += transform.right * move.x;
+            m_Forward = transform.forward;
+            m_Right = Vector3.Cross(m_SlopeNormal, m_Forward).normalized;
+            m_Forward = Vector3.Cross(m_Right, m_SlopeNormal).normalized;
+
+            m_Movement = m_Forward * move.y;
+            m_Movement += m_Right * move.x;
             m_Movement *= Mathf.Lerp(Mathf.Lerp(moveSpeed, crouchMoveSpeed, m_Crouch), dashSpeed, m_Dash);
 
             if (foleyEffect != null)
@@ -689,6 +711,18 @@ namespace FPSKit
         {
             Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.DrawFrustum(new Vector3(0,bodyHeight-viewHeightOffset,0), 40, 5, .01f, 1);
+
+            if(Application.isPlaying && drawDebug)
+            {
+                Gizmos.matrix = Matrix4x4.identity;
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(transform.position, transform.position + m_SlopeNormal);
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(transform.position, transform.position + right);
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(transform.position, transform.position + forward);
+            }
+
         }
 
         void OnGUI()
