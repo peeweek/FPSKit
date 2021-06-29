@@ -11,27 +11,30 @@ First Person Game Kit for Unity 2020.3+
 ## Features
 
 * Configurable First Person Controller
-  * Move / Look
-  * Crouch
-  * Jump (+ Multiple)
-  * Sprint
+  * ✅ Move / Look
+  * ✅ Head Bobbing
+  * ✅ Crouch
+  * ✅ Jump (+ Multiple)
+  * ✅ Sprint (Dash)
+  * ✅ Aim
+  * ✅ Slide on Slopes
 * Configurable Input
-  * Legacy/New Input System
-  * Pad Rumble on Shoot
+  * Legacy System
+  * ✅ New Input System
+  * ✅ Pad Rumble on Shoot
 * Camera Rigs
-  * Cinemachine
+  * ✅ Cinemachine Virtual Cameras
   * Standard Camera
 * Attachments (Weapons, Hands, etc.)
   * Simple Locomotion
   * Simple Weapon
-  * Aim Down Sight Weapon
+  * ✅ Aim Down Sight Weapon
   * Simple Weapon + Alt shot 
 * Projectiles
   * Instant Projectile
-  * Rigid Body Projectile
-  * Projectile Audio/Light/VFX
+  * ✅ Rigid Body Projectile
+  * ✅ Projectile Audio/Light/VFX
 * Pickups
   * Weapons
   * Ammo
-
 
