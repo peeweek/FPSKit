@@ -205,6 +205,10 @@ namespace FPSKit
             // Apply to character   
             m_Move = m_Movement + m_Forces;
 
+            // Keep Character Grounded, when grounded (and not jumping)
+            if(m_Character.isGrounded && !jump)
+                m_Move += new Vector3(0, -(1 + speed), 0);
+
             m_Character.Move(m_Move * Time.deltaTime);
 
         }
@@ -299,10 +303,12 @@ namespace FPSKit
             if (m_Character.isGrounded)
             {
                 m_Forces *= (1.0f - (groundFriction * Time.deltaTime));
-            } 
-
-            // Apply Gravity
-            m_Forces += Physics.gravity * gravityScale * Time.deltaTime;
+            }
+            else
+            {
+                // Apply Gravity
+                m_Forces += Physics.gravity * gravityScale * Time.deltaTime;
+            }
 
 
             // Apply Terminal Velocity Clamp

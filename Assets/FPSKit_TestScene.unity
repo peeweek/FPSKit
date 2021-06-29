@@ -2178,6 +2178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonController
       objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502468, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
       propertyPath: drawDebug
       value: 1
@@ -2733,7 +2737,7 @@ RectTransform:
   m_Father: {fileID: 8689066240026932432}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.60138917}
+  m_AnchorMin: {x: 0, y: 0.9412204}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -3352,7 +3356,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8689066238358143042}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.3986108
+  m_Size: 0.058779594
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
