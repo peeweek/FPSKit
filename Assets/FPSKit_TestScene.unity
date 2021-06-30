@@ -2187,6 +2187,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: initialAttachment
+      value: 
+      objectReference: {fileID: 2446479915352778183, guid: 21e89a78ba50a9143908652807e251b5, type: 3}
+    - target: {fileID: 5605719379376502469, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
       propertyPath: slopeSlide.m_Curve.Array.size
       value: 4
       objectReference: {fileID: 0}
