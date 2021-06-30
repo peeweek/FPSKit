@@ -48,7 +48,9 @@ namespace FPSKit
                 if (effect == null)
                     continue;
 
-                effect.ApplyEffect(collision.contacts[0].point, collision.contacts[0].normal);
+                var contact = collision.contacts[0];
+
+                effect.ApplyEffect(contact.point, contact.point + contact.normal);
             }
         }
 

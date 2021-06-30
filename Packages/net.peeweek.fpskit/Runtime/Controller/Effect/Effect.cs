@@ -7,6 +7,6 @@ namespace FPSKit
     /// </summary>
     public abstract class Effect : MonoBehaviour
     {
-        public abstract void ApplyEffect(Vector3 position, Vector3 normal);
+        public abstract void ApplyEffect(Vector3 position, Vector3 target);
     }
 }

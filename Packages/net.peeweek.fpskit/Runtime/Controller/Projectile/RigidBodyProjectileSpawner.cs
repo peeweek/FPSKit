@@ -9,6 +9,8 @@ namespace FPSKit
         GameObject referencePrefab;
         [SerializeField]
         float initialSpeed = 12;
+        [SerializeField]
+        float upwardsModifier = 0.025f;
 
         [Header("Instance Pool")]
         [Min(12)]
@@ -59,7 +61,7 @@ namespace FPSKit
                 }
         }
 
-        public override bool Spawn(Vector3 source, Vector3 target, bool hitTarget)
+        public override bool Spawn(Ray ray, RaycastHit hit, bool hitTarget)
         {
             if(m_AvailableInstances.Count == 0 && reapOldestInstance)
                 Reap();
@@ -68,7 +70,13 @@ namespace FPSKit
                 return false;
             else
             {
-                // Here we spawn!
+                var source = ray.origin;
+                var target = hit.point;
+
+                // Apply Upwards Modifier;
+                target.y += (target - source).magnitude * upwardsModifier;
+
+                // Here we Spawn !
                 GameObject go = m_AvailableInstances.First.Value.gameObject;
                 m_AvailableInstances.RemoveFirst();
                 m_Instances.AddFirst(go.GetComponent<RigidBodyProjectile>());

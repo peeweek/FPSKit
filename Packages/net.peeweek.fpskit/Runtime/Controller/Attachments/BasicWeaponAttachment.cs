@@ -62,6 +62,9 @@ namespace FPSKit
             base.OnInactive(controller);
         }
 
+        Ray m_Ray;
+        RaycastHit m_RaycastHit;
+
         public override void OnUpdate(FirstPersonController controller)
         {
             base.OnUpdate(controller);
@@ -92,20 +95,21 @@ namespace FPSKit
                     Vector3 source = Vector3.zero;
                     Vector3 target = Vector3.one;
                     bool hasHit = false;
-                    if(Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hit, projectileSpawner.maxDistance))
+
+                    m_Ray.origin = transform.position;
+                    m_Ray.direction = transform.forward;
+                    if (Physics.Raycast(m_Ray, out m_RaycastHit, projectileSpawner.maxDistance))
                     {
-                        target = hit.point + transform.up * hit.distance * projectileSpawner.upwardsModifier;
-                        source = spawnerSource.position;
                         hasHit = true;
                     }
                     else
                     {
-                        source = spawnerSource.position;
-                        target = source + spawnerSource.forward * projectileSpawner.maxDistance;
+                        m_RaycastHit.point = m_Ray.origin + m_Ray.direction * projectileSpawner.maxDistance;
+                        m_RaycastHit.normal = -m_Ray.direction;
                         hasHit = false;
                     }
 
-                    projectileSpawner.Spawn(source, target, hasHit);
+                    projectileSpawner.Spawn(m_Ray, m_RaycastHit, hasHit);
 
                     // Play Effects
                     foreach(var effect in effects)
@@ -113,7 +117,7 @@ namespace FPSKit
                         if (effect == null)
                             continue;
 
-                        effect.ApplyEffect(source, target - source);
+                        effect.ApplyEffect(source, target);
                     }
 
                     if(recoil)
