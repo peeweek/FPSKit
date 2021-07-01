@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2abbcd2a66afba54ca515fdf2eb312a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponSource: {fileID: 8092666348462848303}
   maxDistance: 50
-  upwardsModifier: 0.06
   referencePrefab: {fileID: 8299187683165847004, guid: 8e9ae322299fe29448ef36fe53b29fb2, type: 3}
   initialSpeed: 48
+  upwardsModifier: 0.06
   poolSize: 12
   reapOldestInstance: 1
 --- !u!1 &1186549097378238141
@@ -217,7 +218,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

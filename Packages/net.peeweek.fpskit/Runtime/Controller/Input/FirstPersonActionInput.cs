@@ -28,6 +28,10 @@ namespace FPSKit
 
         public InputAction tertiaryActionButton;
 
+        public InputAction nextAttachmentButton;
+
+        public InputAction previousAttachmentButton;
+
 
         public override Vector2 move => GetAxis(moveAxis);
 
@@ -46,6 +50,10 @@ namespace FPSKit
         public override ButtonState secondaryAction => GetButton(secondaryActionButton);
 
         public override ButtonState tertiaryAction => GetButton(tertiaryActionButton);
+
+        public override ButtonState nextAttachment => GetButton(nextAttachmentButton);
+
+        public override ButtonState previousAttachment => GetButton(previousAttachmentButton);
 
 
         Vector2 GetAxis(InputAction axisAction)

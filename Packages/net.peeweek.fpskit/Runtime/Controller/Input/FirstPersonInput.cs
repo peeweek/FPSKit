@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FPSKit
@@ -24,6 +22,8 @@ namespace FPSKit
         public abstract ButtonState primaryAction { get; }
         public abstract ButtonState secondaryAction { get; }
         public abstract ButtonState tertiaryAction { get; }
+        public abstract ButtonState nextAttachment { get; }
+        public abstract ButtonState previousAttachment { get; }
 
     }
 }

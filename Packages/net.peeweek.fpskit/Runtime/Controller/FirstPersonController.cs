@@ -202,7 +202,13 @@ namespace FPSKit
             UpdateViewBobbing();
 
             // If Attachment present, update it
-            m_CurrentAttachment?.OnUpdate(this);
+
+            if(input.nextAttachment == ButtonState.JustPressed)
+                NextAttachment();
+            else if (input.previousAttachment == ButtonState.JustPressed)
+                PreviousAttachment();
+            else 
+                m_CurrentAttachment?.OnUpdate(this);
 
             // Apply to character   
             m_Move = m_Movement + m_Forces;

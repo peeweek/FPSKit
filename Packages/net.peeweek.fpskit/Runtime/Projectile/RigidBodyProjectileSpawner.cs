@@ -70,7 +70,7 @@ namespace FPSKit
                 return false;
             else
             {
-                var source = ray.origin;
+                var source = weaponSource.position;
                 var target = hit.point;
 
                 // Apply Upwards Modifier;

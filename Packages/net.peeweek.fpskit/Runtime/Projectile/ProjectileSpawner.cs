@@ -7,6 +7,7 @@ namespace FPSKit
     /// </summary>
     public abstract class ProjectileSpawner : MonoBehaviour
     {
+        public Transform weaponSource;
         public float maxDistance = 50f;
 
         /// <summary>

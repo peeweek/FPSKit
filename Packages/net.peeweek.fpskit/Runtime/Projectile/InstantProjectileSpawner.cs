@@ -6,8 +6,6 @@ namespace FPSKit
 {
     public class InstantProjectileSpawner : ProjectileSpawner
     {
-        public Transform weaponSource;
-
         public Effect[] traceEffects;
         public Effect[] impactEffects;
 
