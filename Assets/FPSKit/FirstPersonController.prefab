@@ -642,7 +642,7 @@ MonoBehaviour:
   foleyFirstStepDistance: 1
   jumpEffect: {fileID: 8336132273978018335}
   jumpLandEffect: {fileID: 1656451970225619635}
-  initialAttachment: {fileID: 2446479915352778183, guid: babfd4b66a701414eb546122017d4c7d, type: 3}
+  initialAttachment: {fileID: 0}
   initialAttachmentIndex: 0
   drawDebug: 0
 --- !u!114 &5605719379376502520

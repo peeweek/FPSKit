@@ -15,13 +15,13 @@ MonoBehaviour:
   m_Active: 1
   m_Shader: {fileID: 4800000, guid: 0849e84e3d62649e8882e9d6f056a017, type: 3}
   m_Settings:
-    Downsample: 0
-    Source: 0
+    Downsample: 1
+    Source: 1
     NormalSamples: 2
     Intensity: 1
-    DirectLightingStrength: 1
-    Radius: 0.5
-    SampleCount: 12
+    DirectLightingStrength: 0.214
+    Radius: 2
+    SampleCount: 16
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

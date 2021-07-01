@@ -1,23 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &4061752096617807756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5332363579440788555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb137b198c6c9a43ac4e1102d819d08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDistance: 50
-  weaponSource: {fileID: 8092666348462848303}
-  traceEffects:
-  - {fileID: 530552778319985821}
-  impactEffects:
-  - {fileID: 5675381391063510535}
 --- !u!1 &1186549097378238141
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +417,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName: OnPlay
   visualEffect: {fileID: 7391959171711024404}
+--- !u!114 &4061752096617807756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332363579440788555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb137b198c6c9a43ac4e1102d819d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 50
+  weaponSource: {fileID: 8092666348462848303}
+  traceEffects:
+  - {fileID: 530552778319985821}
+  impactEffects:
+  - {fileID: 5675381391063510535}
 --- !u!1 &7201563762736611895
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +631,10 @@ PrefabInstance:
       propertyPath: projectileSource
       value: 
       objectReference: {fileID: 8092666348462848303}
+    - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
+      propertyPath: m_AttachmentIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2925594719883857501, guid: 61d27845d19f5424e943bc06875e7b63, type: 3}
       propertyPath: projectileSpawner
       value: 

@@ -475,6 +475,15 @@ namespace FPSKit
 
         #endregion
 
+        #region PICKUP
+
+        public void PickUp(FirstPersonPickup pickup, bool setActive = false)
+        {
+            if (TryAttach(pickup.attachment, out Attachment newAttachment, setActive)) ;
+        }
+
+        #endregion
+
         #region CAMERA
 
         /// <summary>
