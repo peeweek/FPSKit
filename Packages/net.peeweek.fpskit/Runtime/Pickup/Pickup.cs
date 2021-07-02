@@ -5,7 +5,7 @@ using UnityEngine;
 namespace FPSKit
 {
     [RequireComponent(typeof(SphereCollider))]
-    public class FirstPersonPickup : MonoBehaviour
+    public class Pickup : MonoBehaviour
     {
         [SerializeField]
         Attachment referenceAttachmentPrefab;
@@ -16,6 +16,9 @@ namespace FPSKit
         SphereCollider m_Collider;
 
 
+        public event PickupDelegate onPickup;
+
+        public delegate void PickupDelegate(Pickup pickup, FirstPersonController controller);
 
         private void Awake()
         {
@@ -28,6 +31,7 @@ namespace FPSKit
             if(other.TryGetComponent(out FirstPersonController controller))
             {
                 controller.PickUp(this, switchToOnPickUp);
+                onPickup?.Invoke(this, controller);
             }
         }
     }

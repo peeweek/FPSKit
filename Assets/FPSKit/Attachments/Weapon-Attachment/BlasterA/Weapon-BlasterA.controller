@@ -209,7 +209,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Weapon-Blaster01
+  m_Name: Weapon-BlasterA
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Shoot
