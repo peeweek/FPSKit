@@ -889,6 +889,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Next Attachment Button
       m_Flags: 0
+    - m_Name: 
+      m_Id: 9a501369-d796-4ab9-9f0b-5ef41772d087
+      m_Path: <Mouse>/backButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Next Attachment Button
+      m_Flags: 0
   previousAttachmentButton:
     m_Name: Previous Attachment Button
     m_Type: 1
@@ -900,6 +908,14 @@ MonoBehaviour:
     - m_Name: 
       m_Id: c0d4b864-819c-4764-8d85-85575f0b196a
       m_Path: <Gamepad>/dpad/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Previous Attachment Button
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 849b8d2f-9733-4d67-a143-b7b0f4e4cd1a
+      m_Path: <Mouse>/forwardButton
       m_Interactions: 
       m_Processors: 
       m_Groups: 
