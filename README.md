@@ -1,5 +1,5 @@
 # FPS Kit
-First Person Game Kit for Unity 2020.3+
+Arcade First Person Game Kit for Unity 2020.3+. Focuses on player agility, unrealistic physics and implementation of basic features (sprint, crouch, multiple jumps, shoot, aim)
 
 ![](https://github.com/peeweek/FPSKit/raw/main/SourceAssets/FPSKit.png)
 
@@ -13,8 +13,6 @@ First Person Game Kit for Unity 2020.3+
 ## Features
 
 Here are the current features implemented ✅ with some other features not yet implemented but planned ⬜ (*these features are planned in the current state but could change, be differently implemented, or even removed if irrelevant*)
-
-
 
 * Configurable First Person Controller
   * ✅ Move / Look
