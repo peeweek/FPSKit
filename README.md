@@ -1,6 +1,8 @@
 # FPS Kit
 First Person Game Kit for Unity 2020.3+
 
+![](https://github.com/peeweek/FPSKit/raw/main/SourceAssets/FPSKit.png)
+
 ## Requirements
 
 * Unity 2020.3 or newer
