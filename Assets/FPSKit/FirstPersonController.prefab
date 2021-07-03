@@ -873,3 +873,35 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
+  nextAttachmentButton:
+    m_Name: Next Attachment Button
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 377135ca-f81c-411f-929c-ec6fd2d6ce69
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 0607b173-6226-4398-bb32-378b72e2f0b1
+      m_Path: <Gamepad>/dpad/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Next Attachment Button
+      m_Flags: 0
+  previousAttachmentButton:
+    m_Name: Previous Attachment Button
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 649a082b-35a1-45f0-955e-3b03463f9cf7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c0d4b864-819c-4764-8d85-85575f0b196a
+      m_Path: <Gamepad>/dpad/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Previous Attachment Button
+      m_Flags: 0
