@@ -1,40 +1,46 @@
-# FPSKit
+# FPS Kit
 First Person Game Kit for Unity 2020.3+
 
 ## Requirements
 
 * Unity 2020.3 or newer
-* HDRP or URP
+* Either HDRP or URP Scriptable Render Pipeline
 * Cinemachine
 * New Input System
 
 ## Features
 
+Here are the current features implemented ✅ with some other features not yet implemented but planned ⬜ (*these features are planned in the current state but could change, be differently implemented, or even removed if irrelevant*)
+
+
+
 * Configurable First Person Controller
   * ✅ Move / Look
   * ✅ Head Bobbing
-  * ✅ Crouch
-  * ✅ Jump (+ Multiple)
+  * ✅ Crouch (Press/Toggle)
+  * ✅ Jump (+ Multiple Jumps)
   * ✅ Sprint (Dash)
-  * ✅ Aim
-  * ✅ Slide on Slopes
+  * ✅ Aim (Aim down sight)
+  * ✅ Slide on steep Slopes
 * Configurable Input
-  * Legacy System
+  * ⬜ Legacy Input System *(under evaluation)*
   * ✅ New Input System
   * ✅ Pad Rumble on Shoot
 * Camera Rigs
   * ✅ Cinemachine Virtual Cameras
-  * Standard Camera
-* Attachments (Weapons, Hands, etc.)
-  * Simple Locomotion
-  * Simple Weapon
-  * ✅ Aim Down Sight Weapon
-  * Simple Weapon + Alt shot 
+  * ⬜ Standard Camera *(under evaluation)*
+* Attachments (Weapons, Hands)
+  * ⬜ Simple Locomotion
+  * ✅ Instant Shooting Weapon (Machine gun)
+  * ✅ Rigidbody Launching Weapon (Tennis ball cannon)
 * Projectiles
-  * Instant Projectile
+  * ✅ Instant Projectile
   * ✅ Rigid Body Projectile
-  * ✅ Projectile Audio/Light/VFX
+* Effects
+  * ✅ Audio
+  * ⬜ Light
+  * ✅ VFX
 * Pickups
-  * Weapons
-  * Ammo
+  * ✅ Weapons
+  * ⬜ Ammo
 
