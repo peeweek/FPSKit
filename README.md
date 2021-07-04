@@ -28,7 +28,7 @@ Here are the current features implemented ✅ with some other features not yet i
   * ✅ Pad Rumble on Shoot
 * Camera Rigs
   * ✅ Cinemachine Virtual Cameras
-  * ⬜ Standard Camera *(under evaluation)*
+  * ✅ Standard Camera
 * Attachments (Weapons, Hands)
   * ⬜ Simple Locomotion
   * ✅ Instant Shooting Weapon (Machine gun)
