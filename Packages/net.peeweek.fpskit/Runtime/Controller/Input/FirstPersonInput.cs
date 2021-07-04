@@ -21,7 +21,7 @@ namespace FPSKit
         public abstract ButtonState aim { get; }
         public abstract ButtonState primaryAction { get; }
         public abstract ButtonState secondaryAction { get; }
-        public abstract ButtonState tertiaryAction { get; }
+        public abstract ButtonState interact { get; }
         public abstract ButtonState nextAttachment { get; }
         public abstract ButtonState previousAttachment { get; }
 

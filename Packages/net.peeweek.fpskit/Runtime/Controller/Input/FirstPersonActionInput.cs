@@ -26,7 +26,7 @@ namespace FPSKit
 
         public InputAction secondaryActionButton;
 
-        public InputAction tertiaryActionButton;
+        public InputAction interactButton;
 
         public InputAction nextAttachmentButton;
 
@@ -49,7 +49,7 @@ namespace FPSKit
 
         public override ButtonState secondaryAction => GetButton(secondaryActionButton);
 
-        public override ButtonState tertiaryAction => GetButton(tertiaryActionButton);
+        public override ButtonState interact => GetButton(interactButton);
 
         public override ButtonState nextAttachment => GetButton(nextAttachmentButton);
 
@@ -97,7 +97,7 @@ namespace FPSKit
             crouchButton.Enable();
             primaryActionButton.Enable();
             secondaryActionButton.Enable();
-            tertiaryActionButton.Enable();
+            interactButton.Enable();
         }
         private void OnDisable()
         {
@@ -108,7 +108,7 @@ namespace FPSKit
             crouchButton.Disable();
             primaryActionButton.Disable();
             secondaryActionButton.Disable();
-            tertiaryActionButton.Disable();
+            interactButton.Disable();
         }
     }
 }

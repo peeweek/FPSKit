@@ -1780,9 +1780,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1739604335985577943, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468369725739184682, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447181947670392562, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4195699656202047160, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5605719379376502468, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
       propertyPath: m_Name
       value: FirstPersonController
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605719379376502468, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5605719379376502468, guid: c3dff7eee30538d40afed0ae5b66e5c0, type: 3}
       propertyPath: m_IsActive

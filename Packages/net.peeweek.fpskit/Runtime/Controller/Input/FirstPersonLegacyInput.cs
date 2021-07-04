@@ -28,7 +28,7 @@ namespace FPSKit
         [SerializeField]
         string secondaryActionButton = "";
         [SerializeField]
-        string tertiaryActionButton = "";
+        string interactButton = "Submit";
         [SerializeField]
         string nextAttachmentButton = "";
         [SerializeField]
@@ -57,7 +57,7 @@ namespace FPSKit
         public override ButtonState secondaryAction => m_SecondaryAction;
 
         ButtonState m_TertiaryAction;
-        public override ButtonState tertiaryAction => m_TertiaryAction;
+        public override ButtonState interact => m_TertiaryAction;
 
         ButtonState m_NextAttachment;
         public override ButtonState nextAttachment => m_NextAttachment;
@@ -73,7 +73,7 @@ namespace FPSKit
             UpdateButton(aimButton , ref m_Aim);
             UpdateButton(primaryActionButton , ref m_PrimaryAction);
             UpdateButton(secondaryActionButton , ref m_SecondaryAction);
-            UpdateButton(tertiaryActionButton, ref m_TertiaryAction);
+            UpdateButton(interactButton, ref m_TertiaryAction);
             UpdateButton(nextAttachmentButton, ref m_NextAttachment);
             UpdateButton(prevAttachmentButton, ref m_PreviousAttachment);
         }

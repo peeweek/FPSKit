@@ -16,7 +16,7 @@ namespace FPSKit
         public bool CanDash = true;
         public bool CanCrouch = true;
         public bool CanAim = true;
-
+        public bool CanInteract = true;
 
         [Header("Input")]
         public FirstPersonInput input;
@@ -109,6 +109,14 @@ namespace FPSKit
         [SerializeField]
         float crouchTransitionSpeed = 15f;
 
+        [Header("Interaction")]
+        [SerializeField]
+        LayerMask interactionLayerMask = int.MaxValue;
+        [SerializeField]
+        float interactMaxDistance = 3f;
+        [SerializeField]
+        FirstPersonInteraction[] interactions;
+
         [Header("Audio")]
         [SerializeField]
         PlayAudioEffect foleyEffect;
@@ -200,6 +208,7 @@ namespace FPSKit
             UpdateMovement();
             UpdateCameraFov();
             UpdateViewBobbing();
+            UpdateInteraction();
 
             // If Attachment present, update it
 
@@ -731,6 +740,42 @@ namespace FPSKit
             }
 
             return true;
+        }
+
+        #endregion
+
+        #region INTERACTION
+
+        Ray m_InteractRay;
+        RaycastHit m_InteractHit;
+        void UpdateInteraction()
+        {
+            if (!CanInteract || interactions == null || interactions.Length == 0)
+                return;
+
+            var interact = input.interact;
+
+            if (interact == ButtonState.JustPressed || interact == ButtonState.Pressed)
+            {
+                m_InteractRay.origin = m_CameraRoot.transform.position;
+                m_InteractRay.direction = m_CameraRoot.forward;
+
+                if (Physics.Raycast(m_InteractRay, out m_InteractHit, interactMaxDistance, interactionLayerMask))
+                {
+                    foreach (var interaction in interactions)
+                    {
+                        if (interaction == null)
+                        {
+                            Debug.LogWarning($"null Interaction at First Person Controller : {gameObject.name}");
+                            continue;
+                        }
+
+                        if (interaction.enabled && interaction.OnInteract(interact, this, m_InteractHit))
+                            break;
+                    }
+                }
+            }
+
         }
 
         #endregion

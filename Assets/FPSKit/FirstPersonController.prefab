@@ -559,6 +559,7 @@ MonoBehaviour:
   CanDash: 1
   CanCrouch: 1
   CanAim: 1
+  CanInteract: 1
   input: {fileID: 5605719379376502520}
   skinWidth: 0.08
   bodyRadius: 0.4
@@ -637,6 +638,11 @@ MonoBehaviour:
   crouchHeight: 0.9
   crouchMoveSpeed: 2.9
   crouchTransitionSpeed: 15
+  interactionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  interactMaxDistance: 3
+  interactions: []
   foleyEffect: {fileID: 5095486764415353061}
   foleyMinMaxStepDistance: {x: 2.5, y: 3.1}
   foleyFirstStepDistance: 1
@@ -864,15 +870,47 @@ MonoBehaviour:
     m_Id: 4f2e0565-2d6a-4f0a-86a0-246a193311c8
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
-  tertiaryActionButton:
-    m_Name: Tertiary Action Button
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: d68c0b78-f8af-4c9b-8c0e-3da3f62ee461
+      m_Path: <Gamepad>/leftTrigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Secondary Action Button
+      m_Flags: 0
+    - m_Name: 
+      m_Id: b81381fe-fc3a-494d-9b91-f76f7e59d361
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Secondary Action Button
+      m_Flags: 0
+  interactButton:
+    m_Name: Interact Button
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 19d5ac6b-ce6b-4168-a9a4-3fb124f85839
+    m_Id: adcb0241-0132-437d-942b-b048e1778e22
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 1647764a-83da-492a-b17c-a9ba99871917
+      m_Path: <Keyboard>/f
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact Button
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 72d547c2-5e82-4bab-a094-2fc4e1d2984b
+      m_Path: <Gamepad>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact Button
+      m_Flags: 0
   nextAttachmentButton:
     m_Name: Next Attachment Button
     m_Type: 1
