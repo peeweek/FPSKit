@@ -22,6 +22,7 @@ Here are the current features implemented ✅ with some other features not yet i
   * ✅ Sprint (Dash)
   * ✅ Aim (Aim down sight)
   * ✅ Slide on steep Slopes
+  * ✅ Interaction with objects
 * Configurable Input
   * ✅ Legacy Input System
   * ✅ New Input System
