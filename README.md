@@ -23,7 +23,7 @@ Here are the current features implemented ✅ with some other features not yet i
   * ✅ Aim (Aim down sight)
   * ✅ Slide on steep Slopes
 * Configurable Input
-  * ⬜ Legacy Input System *(under evaluation)*
+  * ✅ Legacy Input System
   * ✅ New Input System
   * ✅ Pad Rumble on Shoot
 * Camera Rigs
