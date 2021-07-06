@@ -13,7 +13,7 @@ namespace FPSKit
         float upwardsModifier = 0.025f;
 
         [Header("Instance Pool")]
-        [Min(12)]
+        [Min(1)]
         [SerializeField]
         int poolSize = 12;
         [SerializeField]
