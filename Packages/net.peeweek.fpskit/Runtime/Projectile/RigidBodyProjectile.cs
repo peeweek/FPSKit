@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace FPSKit
@@ -9,38 +10,64 @@ namespace FPSKit
         protected int explodeOnCollide = 0;
         [SerializeField]
         protected float explodeAfterDelay = 0;
+        [SerializeField]
+        protected float recycleAfterExplodeDelay = 0;
+
 
         [SerializeField]
         Effect[] onCollideEffects;
 
+        [SerializeField]
+        Effect[] onExplodeEffects;
 
-        RigidBodyProjectileSpawner parent;
-        int m_Collisions;
-        float m_TTL;
+
+        protected RigidBodyProjectileSpawner m_Parent;
+        protected int m_Collisions;
+        protected float m_TTL;
+
+        protected bool m_Exploding { get; private set; }
 
         public void SetParent(RigidBodyProjectileSpawner parent)
         {
             if (parent != null)
-                this.parent = parent;
+                m_Parent = parent;
         }
 
+        /// <summary>
+        /// Immediately recycles this projectile
+        /// </summary>
         public void Recycle()
         {
-            parent?.Reap(this);
+            m_Parent?.Reap(this);
         }
 
-        public void Explode()
+
+        /// <summary>
+        /// Coroutine: Triggers an explosion, and after a delay, the recycling of the projectile
+        /// </summary>
+        /// <returns></returns>
+        protected IEnumerator Explode()
         {
+            foreach (var effect in onExplodeEffects)
+            {
+                if (effect == null)
+                    continue;
+
+                effect.ApplyEffect(transform.position, transform.position + transform.up);
+            }
+
+            yield return new WaitForSeconds(recycleAfterExplodeDelay);
             Recycle();
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             m_Collisions = 0;
             m_TTL = 0;
+            m_Exploding = false;
         }
 
-        private void OnCollisionEnter(Collision collision)
+        protected virtual void OnCollisionEnter(Collision collision)
         {
             m_Collisions++;
             foreach(var effect in onCollideEffects)
@@ -54,15 +81,17 @@ namespace FPSKit
             }
         }
 
-        void Update()
+        protected virtual void Update()
         {
+            if (m_Exploding)
+                return;
+
             if (explodeOnCollide > 0 && m_Collisions >= explodeOnCollide)
-                Explode();
-
-            if (explodeAfterDelay > 0 && m_TTL > explodeAfterDelay)
-                Explode();
-
-            m_TTL += Time.deltaTime;
+                StartCoroutine(Explode());
+            else if (explodeAfterDelay > 0 && m_TTL > explodeAfterDelay)
+                StartCoroutine(Explode());
+            else
+                m_TTL += Time.deltaTime;
         }
     }
 }
