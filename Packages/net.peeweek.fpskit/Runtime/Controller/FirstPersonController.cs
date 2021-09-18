@@ -9,7 +9,8 @@ namespace FPSKit
     public class FirstPersonController : MonoBehaviour
     {
         public bool Paused = false;
-        [Header("Features")]
+
+        //[Header("Features")]
         public bool CanMove = true;
         public bool CanLook = true;
         public bool CanJump = true;
@@ -18,10 +19,10 @@ namespace FPSKit
         public bool CanAim = true;
         public bool CanInteract = true;
 
-        [Header("Input")]
+        //[Header("Input")]
         public FirstPersonInput input;
 
-        [Header("Body Configuration")]
+        //[Header("Body Configuration")]
         [SerializeField]
         float skinWidth = 0.08f;
         [SerializeField]
@@ -29,7 +30,7 @@ namespace FPSKit
         [SerializeField]
         float bodyHeight = 1.95f;
 
-        [Header("Movement")]
+        //[Header("Movement")]
         [SerializeField]
         float moveSpeed = 5f;
         [SerializeField]
@@ -39,7 +40,7 @@ namespace FPSKit
         [SerializeField]
         float stepOffset = 0.3f;
 
-        [Header("Momentum")]
+        //[Header("Momentum")]
         [SerializeField]
         float terminalSpeed = 52.7f;
         [SerializeField]
@@ -51,7 +52,7 @@ namespace FPSKit
         [SerializeField]
         float slopeSlideScale = 14f;
 
-        [Header("Look")]
+        //[Header("Look")]
         [SerializeField]
         float turnSpeed = 360;
         [SerializeField]
@@ -69,7 +70,7 @@ namespace FPSKit
         [SerializeField]
         AnimationCurve viewBobbingCurve;
 
-        [Header("Aim")]
+        //[Header("Aim")]
         [SerializeField]
         bool toggleAim = true;
         [SerializeField]
@@ -79,7 +80,7 @@ namespace FPSKit
         [SerializeField]
         float recoilSmoothSpeed = 15f;
 
-        [Header("Jump")]
+        //[Header("Jump")]
         [SerializeField]
         float jumpImpulseSpeed = 8.5f;
         [SerializeField]
@@ -87,7 +88,7 @@ namespace FPSKit
         [SerializeField]
         float minDelayBetweenJumps = 0.35f;
 
-        [Header("Dash")]
+        //[Header("Dash")]
         [SerializeField]
         float dashSpeed = 10.5f;
         [SerializeField]
@@ -99,7 +100,7 @@ namespace FPSKit
         [SerializeField]
         float dashDuration = -1f;
 
-        [Header("Crouch")]
+        //[Header("Crouch")]
         [SerializeField]
         bool toggleCrouch = true;
         [SerializeField]
@@ -109,7 +110,7 @@ namespace FPSKit
         [SerializeField]
         float crouchTransitionSpeed = 15f;
 
-        [Header("Interaction")]
+        //[Header("Interaction")]
         [SerializeField]
         LayerMask interactionLayerMask = int.MaxValue;
         [SerializeField]
@@ -117,7 +118,7 @@ namespace FPSKit
         [SerializeField]
         FirstPersonInteraction[] interactions;
 
-        [Header("Audio")]
+        //[Header("Audio")]
         [SerializeField]
         PlayAudioEffect foleyEffect;
         [SerializeField]
@@ -129,13 +130,13 @@ namespace FPSKit
         [SerializeField]
         PlayAudioEffect jumpLandEffect;
 
-        [Header("Attachments")]
+        //[Header("Attachments")]
         [SerializeField]
         Attachment initialAttachment;
         [SerializeField]
         int initialAttachmentIndex = 0;
 
-        [Header("Debug")]
+        //[Header("Debug")]
         [SerializeField]
         bool drawDebug = false;
 
@@ -199,16 +200,31 @@ namespace FPSKit
                 Cursor.visible = false;
             }
 
-            UpdateCrouch();
+            if(CanCrouch)
+                UpdateCrouch();
+
             UpdateGravityAndMomentum();
-            UpdateCameraRotation();
-            UpdateAim();
-            UpdateJump();
-            UpdateDash();
-            UpdateMovement();
+            
+            if(CanLook)
+                UpdateCameraRotation();
+
+            if(CanAim)
+                UpdateAim();
+
+            if(CanJump)
+                UpdateJump();
+
+            if(CanDash)
+                UpdateDash();
+
+            if(CanMove)
+                UpdateMovement();
+
             UpdateCameraFov();
             UpdateViewBobbing();
-            UpdateInteraction();
+
+            if(CanInteract)
+                UpdateInteraction();
 
             // If Attachment present, update it
 
