@@ -14,59 +14,95 @@ namespace FPSKit
         {
             //base.OnInspectorGUI(); return;
             serializedObject.Update();
-            DoProperty("Paused");
 
             DoTabs();
-            switch (currentTab)
+
+            using(new GUILayout.VerticalScope(Styles.helpBox))
             {
-                case TabGroup.Body:
-                    DoProperty("skinWidth");
-                    DoProperty("bodyRadius");
-                    DoProperty("bodyHeight");
-                    break;
-                case TabGroup.Momentum:
-                    DoProperty("terminalSpeed");
-                    DoProperty("gravityScale");
-                    DoProperty("groundFriction");
-                    DoProperty("slopeSlideAngleThredhold");
-                    DoProperty("slopeSlideScale");
-                    break;
-                case TabGroup.Movement:
-                    DoProperty("CanMove");
-                    DoProperty("moveSpeed");
-                    DoProperty("minMoveDistance");
-                    DoProperty("slopeLimit");
-                    DoProperty("stepOffset");
-                    break;
-                case TabGroup.Look:
-                    DoProperty("CanLook");
-                    DoProperty("turnSpeed");
-                    DoProperty("pitchSpeed");
-                    DoProperty("minMaxPitch");
-                    DoProperty("baseFieldOfView");
-                    DoProperty("viewHeightOffset");
-                    DoProperty("cameraPrefab");
-                    DoProperty("viewBobbing");
-                    DoProperty("viewBobbingCurve");
-
-
-
-                    break;
-                case TabGroup.Aim:
-                    break;
-                case TabGroup.Jump:
-                    break;
-                case TabGroup.Crouch:
-                    break;
-                case TabGroup.Interaction:
-                    break;
-                case TabGroup.Audio:
-                    break;
-                case TabGroup.Attachments:
-                    break;
-                default:
-                    break;
+                switch (currentTab)
+                {
+                    case TabGroup.Body:
+                        DoProperty("skinWidth");
+                        DoProperty("bodyRadius");
+                        DoProperty("bodyHeight");
+                        break;
+                    case TabGroup.Momentum:
+                        DoProperty("terminalSpeed");
+                        DoProperty("gravityScale");
+                        DoProperty("groundFriction");
+                        DoProperty("slopeSlideAngleThredhold");
+                        DoProperty("slopeSlideScale");
+                        break;
+                    case TabGroup.Movement:
+                        DoProperty("CanMove");
+                        DoProperty("moveSpeed");
+                        DoProperty("minMoveDistance");
+                        DoProperty("slopeLimit");
+                        DoProperty("stepOffset");
+                        break;
+                    case TabGroup.Look:
+                        DoProperty("CanLook");
+                        DoProperty("turnSpeed");
+                        DoProperty("pitchSpeed");
+                        DoProperty("minMaxPitch");
+                        DoProperty("baseFieldOfView");
+                        DoProperty("viewHeightOffset");
+                        DoProperty("cameraPrefab");
+                        DoProperty("viewBobbing");
+                        DoProperty("viewBobbingCurve");
+                        break;
+                    case TabGroup.Aim:
+                        DoProperty("toggleAim");
+                        DoProperty("aimFOV");
+                        DoProperty("aimTransitionSpeed");
+                        DoProperty("recoilSmoothSpeed");
+                        break;
+                    case TabGroup.Jump:
+                        DoProperty("CanJump");
+                        DoProperty("jumpImpulseSpeed");
+                        DoProperty("maxJumps");
+                        DoProperty("minDelayBetweenJumps");
+                        break;
+                    case TabGroup.Dash:
+                        DoProperty("CanDash");
+                        DoProperty("dashSpeed");
+                        DoProperty("dashTransitionSpeed");
+                        DoProperty("dashForwardThreshold");
+                        DoProperty("dashFOV");
+                        DoProperty("dashDuration");
+                        break;
+                    case TabGroup.Crouch:
+                        DoProperty("CanCrouch");
+                        DoProperty("toggleCrouch");
+                        DoProperty("crouchHeight");
+                        DoProperty("crouchMoveSpeed");
+                        DoProperty("crouchTransitionSpeed");
+                        break;
+                    case TabGroup.Interaction:
+                        DoProperty("CanInteract");
+                        DoProperty("interactionLayerMask");
+                        DoProperty("interactMaxDistance");
+                        DoProperty("interactions");
+                        break;
+                    case TabGroup.Audio:
+                        DoProperty("foleyEffect");
+                        DoProperty("foleyMinMaxStepDistance");
+                        DoProperty("foleyFirstStepDistance");
+                        DoProperty("jumpEffect");
+                        DoProperty("jumpLandEffect");
+                        break;
+                    case TabGroup.Attachments:
+                        DoProperty("initialAttachment");
+                        DoProperty("initialAttachmentIndex");
+                        break;
+                    default:
+                        break;
+                }
             }
+            EditorGUILayout.Space();
+            DoProperty("input");
+            DoProperty("Paused");
+            DoProperty("drawDebug");
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -79,11 +115,11 @@ namespace FPSKit
             Look,
             Aim,
             Jump,
+            Dash,
             Crouch,
             Interaction,
             Audio,
             Attachments
-        
         }
 
         TabGroup currentTab = TabGroup.Body;
@@ -93,24 +129,27 @@ namespace FPSKit
             if (GUILayout.Toggle(currentTab == tabGroup, tabGroup.ToString(), style))
                 currentTab = tabGroup;
         }
+
         void DoTabs()
         {
             using(new GUILayout.HorizontalScope())
             {
-                DoTab(TabGroup.Body, EditorStyles.miniButtonLeft);
-                DoTab(TabGroup.Momentum, EditorStyles.miniButtonMid);
-                DoTab(TabGroup.Movement, EditorStyles.miniButtonMid);
-                DoTab(TabGroup.Look, EditorStyles.miniButtonMid);
-                DoTab(TabGroup.Aim, EditorStyles.miniButtonRight);
+                DoTab(TabGroup.Body, Styles.miniButtonLeft);
+                DoTab(TabGroup.Momentum, Styles.miniButtonMid);
+                DoTab(TabGroup.Movement, Styles.miniButtonMid);
+                DoTab(TabGroup.Look, Styles.miniButtonMid);
+                DoTab(TabGroup.Jump, Styles.miniButtonRight);
             }
             using (new GUILayout.HorizontalScope())
             {
-                DoTab(TabGroup.Jump, EditorStyles.miniButtonLeft);
-                DoTab(TabGroup.Crouch, EditorStyles.miniButtonMid);
-                DoTab(TabGroup.Interaction, EditorStyles.miniButtonMid);
-                DoTab(TabGroup.Audio, EditorStyles.miniButtonMid);
-                DoTab(TabGroup.Attachments, EditorStyles.miniButtonRight);
+                DoTab(TabGroup.Aim, Styles.miniButtonLeft);
+                DoTab(TabGroup.Dash, Styles.miniButtonMid);
+                DoTab(TabGroup.Crouch, Styles.miniButtonMid);
+                DoTab(TabGroup.Interaction, Styles.miniButtonMid);
+                DoTab(TabGroup.Audio, Styles.miniButtonMid);
+                DoTab(TabGroup.Attachments, Styles.miniButtonRight);
             }
+            GUILayout.Space(8);
 
         }
 
@@ -131,7 +170,31 @@ namespace FPSKit
                 }
             }
 
-            EditorGUILayout.PropertyField(m_Props[name]);
+            EditorGUILayout.PropertyField(m_Props[name], true);
+
+        }
+    }
+
+    static class Styles
+    {
+        public static GUIStyle miniButtonLeft;
+        public static GUIStyle miniButtonMid;
+        public static GUIStyle miniButtonRight;
+        public static GUIStyle helpBox;
+
+        static Styles()
+        {
+            miniButtonLeft = new GUIStyle(EditorStyles.miniButtonLeft);
+            miniButtonMid = new GUIStyle(EditorStyles.miniButtonMid);
+            miniButtonRight = new GUIStyle(EditorStyles.miniButtonRight);
+
+            int height = 24;
+            miniButtonLeft.fixedHeight = height;
+            miniButtonMid.fixedHeight = height;
+            miniButtonRight.fixedHeight = height;
+
+            helpBox = new GUIStyle(EditorStyles.helpBox);
+            helpBox.padding = new RectOffset(8, 8, 8, 8);
 
         }
     }

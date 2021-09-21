@@ -791,7 +791,6 @@ namespace FPSKit
                     }
                 }
             }
-
         }
 
         #endregion
