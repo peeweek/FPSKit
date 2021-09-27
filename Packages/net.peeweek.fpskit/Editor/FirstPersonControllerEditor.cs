@@ -124,9 +124,9 @@ namespace FPSKit
 
         TabGroup currentTab = TabGroup.Body;
 
-        void DoTab(TabGroup tabGroup, GUIStyle style)
+        void DoTab(TabGroup tabGroup, GUIStyle style, Texture texture = null)
         {
-            if (GUILayout.Toggle(currentTab == tabGroup, tabGroup.ToString(), style))
+            if (GUILayout.Toggle(currentTab == tabGroup, new GUIContent(tabGroup.ToString(),texture), style))
                 currentTab = tabGroup;
         }
 

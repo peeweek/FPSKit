@@ -458,6 +458,11 @@ namespace FPSKit
                     jumpLandEffect?.ApplyEffect(transform.position, Vector3.up);
                 }
             }
+            else
+            {
+                if (m_Jump == 0) // if falling...
+                    m_Jump = 1;  // Count at least one jump
+            }
 
             m_JumpTTL += Time.deltaTime;
 
