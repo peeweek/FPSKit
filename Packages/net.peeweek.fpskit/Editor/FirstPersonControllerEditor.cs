@@ -102,6 +102,7 @@ namespace FPSKit
             EditorGUILayout.Space();
             DoProperty("input");
             DoProperty("Paused");
+            DoProperty("handleCursorWhilePaused");
             DoProperty("drawDebug");
 
             serializedObject.ApplyModifiedProperties();

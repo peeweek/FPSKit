@@ -10,6 +10,9 @@ namespace FPSKit
     {
         public bool Paused = false;
 
+        [SerializeField]
+        bool handleCursorWhilePaused = true;
+
         //[Header("Features")]
         public bool CanMove = true;
         public bool CanLook = true;
@@ -188,19 +191,22 @@ namespace FPSKit
         #region UPDATE
         private void LateUpdate()
         {
-            if (Paused)
+            if(handleCursorWhilePaused)
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                return;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                if (Paused)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    return;
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
             }
 
-            if(CanCrouch)
+            if (CanCrouch)
                 UpdateCrouch();
 
             UpdateGravityAndMomentum();
