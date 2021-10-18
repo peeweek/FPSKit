@@ -197,7 +197,6 @@ namespace FPSKit
                 {
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
-                    return;
                 }
                 else
                 {
@@ -205,6 +204,9 @@ namespace FPSKit
                     Cursor.visible = false;
                 }
             }
+
+            if (Paused)
+                return;
 
             if (CanCrouch)
                 UpdateCrouch();
