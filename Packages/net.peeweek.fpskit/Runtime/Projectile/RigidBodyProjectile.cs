@@ -41,6 +41,11 @@ namespace FPSKit
             m_Parent?.Reap(this);
         }
 
+        public void DestroyProjectile()
+        {
+            StartCoroutine(Explode());
+        }
+
 
         /// <summary>
         /// Coroutine: Triggers an explosion, and after a delay, the recycling of the projectile
