@@ -41,9 +41,10 @@ namespace FPSKit
             m_Parent?.Reap(this);
         }
 
-        public void DestroyProjectile()
+        public void BeginExplode()
         {
-            StartCoroutine(Explode());
+            if (!m_Exploding)
+                StartCoroutine(Explode());
         }
 
 
@@ -51,7 +52,7 @@ namespace FPSKit
         /// Coroutine: Triggers an explosion, and after a delay, the recycling of the projectile
         /// </summary>
         /// <returns></returns>
-        protected IEnumerator Explode()
+        private IEnumerator Explode()
         {
             foreach (var effect in onExplodeEffects)
             {
