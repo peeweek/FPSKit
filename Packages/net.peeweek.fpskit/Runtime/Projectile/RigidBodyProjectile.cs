@@ -54,6 +54,8 @@ namespace FPSKit
         /// <returns></returns>
         private IEnumerator Explode()
         {
+            m_Exploding = true;
+
             foreach (var effect in onExplodeEffects)
             {
                 if (effect == null)
