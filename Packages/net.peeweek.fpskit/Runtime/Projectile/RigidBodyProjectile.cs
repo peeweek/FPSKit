@@ -23,7 +23,9 @@ namespace FPSKit
 
         protected RigidBodyProjectileSpawner m_Parent;
         protected int m_Collisions;
-        protected float m_TTL;
+
+        public float TTL => m_TTL;
+        float m_TTL;
 
         protected bool m_Exploding { get; private set; }
 
