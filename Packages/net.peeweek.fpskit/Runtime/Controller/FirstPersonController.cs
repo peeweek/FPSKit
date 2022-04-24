@@ -151,6 +151,9 @@ namespace FPSKit
         Dictionary<int, Attachment> m_Attachments;
         Attachment m_CurrentAttachment;
 
+        // Properties
+        public Transform cameraRoot => m_CameraRoot;
+
         private void Awake()
         {
             SyncComponents();
