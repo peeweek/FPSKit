@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5605719379376502523}
   m_RootOrder: 1
@@ -173,6 +174,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5605719379376502523}
   m_RootOrder: 2
@@ -318,6 +320,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1888428380650155801}
   m_RootOrder: 0
@@ -445,6 +448,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1062914636139389606}
   m_Father: {fileID: 5605719379376502523}
@@ -515,6 +519,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1888428380650155801}
   - {fileID: 1242149105122865459}
@@ -553,6 +558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Paused: 0
+  handleCursorWhilePaused: 1
   CanMove: 1
   CanLook: 1
   CanJump: 1
@@ -719,6 +725,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move Axis
       m_Flags: 8
+    m_Flags: 0
   lookAxis:
     m_Name: Look Axis
     m_Type: 0
@@ -743,6 +750,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Look Axis
       m_Flags: 0
+    m_Flags: 0
   jumpButton:
     m_Name: Jump Button
     m_Type: 1
@@ -767,6 +775,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Jump Button
       m_Flags: 0
+    m_Flags: 0
   dashButton:
     m_Name: Dash Button
     m_Type: 1
@@ -791,6 +800,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Dash Button
       m_Flags: 0
+    m_Flags: 0
   crouchButton:
     m_Name: Crouch Button
     m_Type: 1
@@ -815,6 +825,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Crouch Button
       m_Flags: 0
+    m_Flags: 0
   aimButton:
     m_Name: Aim Button
     m_Type: 1
@@ -839,6 +850,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Aim Button
       m_Flags: 0
+    m_Flags: 0
   primaryActionButton:
     m_Name: Primary Action Button
     m_Type: 1
@@ -863,6 +875,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Primary Action Button
       m_Flags: 0
+    m_Flags: 0
   secondaryActionButton:
     m_Name: Secondary Action Button
     m_Type: 0
@@ -887,6 +900,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Secondary Action Button
       m_Flags: 0
+    m_Flags: 0
   interactButton:
     m_Name: Interact Button
     m_Type: 0
@@ -911,6 +925,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Interact Button
       m_Flags: 0
+    m_Flags: 0
   nextAttachmentButton:
     m_Name: Next Attachment Button
     m_Type: 1
@@ -935,6 +950,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Next Attachment Button
       m_Flags: 0
+    m_Flags: 0
   previousAttachmentButton:
     m_Name: Previous Attachment Button
     m_Type: 1
@@ -959,3 +975,4 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Previous Attachment Button
       m_Flags: 0
+    m_Flags: 0
