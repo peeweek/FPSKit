@@ -16,5 +16,10 @@ namespace FPSKit
         /// <param name="source"></param>
         /// <returns></returns>
         public abstract bool Spawn(Ray ray, RaycastHit hit, bool hitTarget);
+
+        public virtual void OnActive(FirstPersonController controller) { }
+        public virtual void OnInactive(FirstPersonController controller) { }
+        public virtual void OnAttach(FirstPersonController controller) { }
+        public virtual void OnDetach(FirstPersonController controller) { }
     }
 }

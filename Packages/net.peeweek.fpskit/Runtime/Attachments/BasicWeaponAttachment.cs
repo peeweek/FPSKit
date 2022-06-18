@@ -55,11 +55,25 @@ namespace FPSKit
         {
             base.OnActive(controller);
             m_TTL = shootDelay;
+            projectileSpawner?.OnActive(controller);
         }
 
         public override void OnInactive(FirstPersonController controller)
         {
             base.OnInactive(controller);
+            projectileSpawner?.OnInactive(controller);
+        }
+
+        public override void OnAttach(FirstPersonController controller)
+        {
+            base.OnAttach(controller);
+            projectileSpawner?.OnAttach(controller);
+        }
+
+        public override void OnDetach(FirstPersonController controller)
+        {
+            base.OnDetach(controller);
+            projectileSpawner?.OnDetach(controller);
         }
 
         Ray m_Ray;

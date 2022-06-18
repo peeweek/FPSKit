@@ -39,9 +39,38 @@ namespace FPSKit
             }
         }
 
-        private void Awake()
+        List<GameObject> todelete;
+
+        void ClearPool()
         {
+            if (todelete == null)
+                todelete = new List<GameObject>();
+            else
+                todelete.Clear();
+
+            foreach (var proj in m_Instances)
+                todelete.Add(proj.gameObject);
+
+            foreach (var proj in m_AvailableInstances)
+                todelete.Add(proj.gameObject);
+
+            for (int i = 0; i < todelete.Count; i++)
+                Destroy(todelete[i]);
+
+            m_Instances.Clear();
+            m_AvailableInstances.Clear();
+        }
+
+        public override void OnAttach(FirstPersonController controller)
+        {
+            base.OnAttach(controller);
             InitializePool();
+        }
+
+        public override void OnDetach(FirstPersonController controller)
+        {
+            base.OnDetach(controller);
+            ClearPool();
         }
 
         private void OnDestroy()
