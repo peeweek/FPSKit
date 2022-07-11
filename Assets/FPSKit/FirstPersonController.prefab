@@ -943,8 +943,8 @@ MonoBehaviour:
       m_Action: Next Attachment Button
       m_Flags: 0
     - m_Name: 
-      m_Id: 9a501369-d796-4ab9-9f0b-5ef41772d087
-      m_Path: <Mouse>/backButton
+      m_Id: ec430fdb-f692-4ba7-8233-32242e6e172e
+      m_Path: <Keyboard>/1
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -968,8 +968,8 @@ MonoBehaviour:
       m_Action: Previous Attachment Button
       m_Flags: 0
     - m_Name: 
-      m_Id: 849b8d2f-9733-4d67-a143-b7b0f4e4cd1a
-      m_Path: <Mouse>/forwardButton
+      m_Id: e8764788-cadc-40c9-bf6a-f2a6fbf49bbb
+      m_Path: <Keyboard>/2
       m_Interactions: 
       m_Processors: 
       m_Groups: 

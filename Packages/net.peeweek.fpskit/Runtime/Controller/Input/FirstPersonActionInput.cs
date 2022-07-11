@@ -98,6 +98,8 @@ namespace FPSKit
             primaryActionButton.Enable();
             secondaryActionButton.Enable();
             interactButton.Enable();
+            nextAttachmentButton.Enable();
+            previousAttachmentButton.Enable();
         }
         private void OnDisable()
         {
@@ -109,6 +111,8 @@ namespace FPSKit
             primaryActionButton.Disable();
             secondaryActionButton.Disable();
             interactButton.Disable();
+            nextAttachmentButton.Disable();
+            previousAttachmentButton.Disable();
         }
     }
 }

@@ -666,7 +666,9 @@ namespace FPSKit
                 return false;
 
             var keys = m_Attachments.Keys.OrderBy(index => index).ToList();
-            int index = (keys.IndexOf(m_CurrentAttachment.index) - 1) % keys.Count;
+            int index = keys.IndexOf(m_CurrentAttachment.index) - 1;
+            if (index < 0)
+                index = keys.Count - 1;
             return SetAttachment(index);
         }
 
