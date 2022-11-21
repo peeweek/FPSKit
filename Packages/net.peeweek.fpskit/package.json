@@ -2,6 +2,21 @@
   "name": "net.peeweek.fpskit",
   "displayName": "FPS Kit",
   "version": "1.0.0-preview",
-  "unity": "2020.3",
-  "description": "Modular Kit for First Person Games"
+  "category": "Gameplay",
+  "unity": "2021.3",
+  "licensesUrl": "https://github.com/peeweek/FPSKit/blob/master/LICENSE",
+  "description": "Modular Kit for First Person Games",
+  "keywords": [
+    "FPS",
+    "First-Person",
+    "Player Controller",
+    "Character",
+    "Weapon"
+  ],
+  "hideInEditor": false,
+  "author" : 
+  {
+    "name" : "PeeWeeK.NET",
+    "url" : "https://github.com/peeweek/"
+  }
 }
