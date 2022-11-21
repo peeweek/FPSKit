@@ -1,7 +1,7 @@
 {
   "name": "net.peeweek.fpskit",
   "displayName": "FPS Kit",
-  "version": "1.0.0-preview",
+  "version": "1.0.1-preview",
   "category": "Gameplay",
   "unity": "2021.3",
   "licensesUrl": "https://github.com/peeweek/FPSKit/blob/master/LICENSE",
@@ -14,9 +14,14 @@
     "Weapon"
   ],
   "hideInEditor": false,
-  "author" : 
-  {
-    "name" : "PeeWeeK.NET",
-    "url" : "https://github.com/peeweek/"
+  "author": {
+    "name": "PeeWeeK.NET",
+    "url": "https://github.com/peeweek/"
+  },
+  "dependencies": {
+    "com.unity.inputsystem": "1.4.0",
+    "com.unity.cinemachine": "2.8.0",
+    "com.unity.render-pipelines.core": "12.1.0",
+    "com.unity.shadergraph": "12.1.0"
   }
 }

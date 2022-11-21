@@ -189,7 +189,12 @@
       "version": "file:net.peeweek.fpskit",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {}
+      "dependencies": {
+        "com.unity.inputsystem": "1.4.0",
+        "com.unity.cinemachine": "2.8.0",
+        "com.unity.render-pipelines.core": "12.1.0",
+        "com.unity.shadergraph": "12.1.0"
+      }
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
