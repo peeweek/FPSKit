@@ -3,6 +3,17 @@ Arcade First Person Game Kit for Unity 2021.3+. Focuses on player agility, unrea
 
 ![](https://github.com/peeweek/FPSKit/raw/main/SourceAssets/FPSKit.png)
 
+## Install
+
+From OpenUPM, add the `https://package.openupm.com` scoped registry in your Package Manager category of your Project Settings, and add the `net.peeweek` scope. Then select FPSKit in the package manager's 'My Registry' section.
+
+[![openupm](https://img.shields.io/npm/v/net.peeweek.fpskit?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/net.peeweek.fpskit/)
+
+### Sample Data
+
+Sample data is available as a unity package in the `Packages` folder of the package.
+
+
 ## Requirements
 
 * Unity 2021.3 or newer
