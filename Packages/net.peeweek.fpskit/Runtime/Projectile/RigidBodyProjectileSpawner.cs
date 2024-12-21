@@ -118,8 +118,9 @@ namespace FPSKit
 
                 instance.SetParent(this);
                 go.SetActive(true);
-                go.transform.position = source;
-                go.GetComponent<Rigidbody>().velocity = (target-source).normalized * initialSpeed;
+                var rb = go.GetComponent<Rigidbody>();
+                rb.Move(source, Quaternion.identity);
+                rb.linearVelocity = (target-source).normalized * initialSpeed;
             }
             return true;
         }
