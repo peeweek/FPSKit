@@ -14,7 +14,7 @@ namespace FPSKit
 
         public int index { get => m_AttachmentIndex; }
         public bool replacesWhenAttached { get => m_ReplacesWhenAttached; }
-        public FirstPersonController owner { get => m_Owner; }
+        public FirstPersonController owner { get => controller; }
         [Header("Global Settings")]
         [SerializeField, Tooltip("Replaces any already attachment present at given index when attached")]
         private bool m_ReplacesWhenAttached;
@@ -22,7 +22,7 @@ namespace FPSKit
         private int m_AttachmentIndex;
 
         [SerializeField, HideInInspector]
-        private FirstPersonController m_Owner;
+        protected FirstPersonController controller;
 
         /// <summary>
         /// Method called when the attachment is created and attached to a player
@@ -30,33 +30,33 @@ namespace FPSKit
         /// <param name="controller">The First Person Controller this Attachment is attached to</param>
         public virtual void OnAttach(FirstPersonController controller)
         {
-            m_Owner = controller;
+            this.controller = controller;
         }
 
         /// <summary>
         /// Method called when the attachment is removed from a player, just before removal
         /// </summary>
         /// <param name="controller">The First Person Controller this Attachment is attached to</param>
-        public virtual void OnDetach(FirstPersonController controller) { }
+        public virtual void OnDetach() { }
 
         /// <summary>
         /// Method Called just after attachment becomes active (for instance when changing attachments)
         /// </summary>
         /// <param name="controller">The First Person Controller this Attachment is attached to</param>
-        public virtual void OnActive(FirstPersonController controller) { }
+        public virtual void OnActive() { }
 
         /// <summary>
         /// Method Called just before attachment becomes inactive (for instance when changing attachments)
         /// </summary>
         /// <param name="controller">The First Person Controller this Attachment is attached to</param>
-        public virtual void OnInactive(FirstPersonController controller) { }
+        public virtual void OnInactive() { }
 
 
         /// <summary>
         /// OnUpdate is called by the FirstPersonController whem the attachment is active
         /// </summary>
         /// <param name="controller"></param>
-        public virtual void OnUpdate(FirstPersonController controller) { }
+        public virtual void OnUpdate() { }
     }
 
 }
