@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace FPSKit
 {
-    public class InstantProjectileSpawner : ProjectileSpawner
+    public class InstantProjectileSpawner : ShotProjectileSpawnerBase
     {
         public Effect[] traceEffects;
         public Effect[] impactEffects;
 
-        public override bool Spawn(Ray ray, RaycastHit hit, bool hitTarget)
+        protected override bool Spawn(Ray ray, RaycastHit hit, bool hitTarget)
         {
             foreach(var effect in traceEffects)
             {
