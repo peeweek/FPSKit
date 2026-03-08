@@ -1,9 +1,9 @@
 {
   "name": "net.peeweek.fpskit",
   "displayName": "FPS Kit",
-  "version": "1.0.1-preview",
+  "version": "2.0.0-preview",
   "category": "Gameplay",
-  "unity": "2021.3",
+  "unity": "6000.0",
   "licensesUrl": "https://github.com/peeweek/FPSKit/blob/master/LICENSE",
   "description": "Modular Kit for First Person Games",
   "keywords": [
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "com.unity.inputsystem": "1.4.0",
-    "com.unity.cinemachine": "2.8.0",
+    "com.unity.cinemachine": "3.1.0",
     "com.unity.render-pipelines.core": "12.1.0",
     "com.unity.shadergraph": "12.1.0"
   }
