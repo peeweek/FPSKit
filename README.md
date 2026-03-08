@@ -1,5 +1,5 @@
 # FPS Kit
-Arcade First Person Game Kit for Unity 2021.3+. Focuses on player agility, unrealistic physics and implementation of basic features (sprint, crouch, multiple jumps, shoot, aim)
+Arcade First Person Game Kit for Unity. Focuses on player agility, unrealistic physics and implementation of basic features (sprint, crouch, multiple jumps, shoot, aim)
 
 ![](https://github.com/peeweek/FPSKit/raw/main/SourceAssets/FPSKit.png)
 
@@ -16,10 +16,10 @@ Sample data is available as a unity package in the `Packages` folder of the pack
 
 ## Requirements
 
-* Unity 2021.3 or newer
+* Unity 6000.0 or newer
 * Either HDRP or URP Scriptable Render Pipeline
-* Cinemachine
-* New Input System
+* Cinemachine (version 3.1.0 or newer)
+* Input System
 
 ## Features
 
