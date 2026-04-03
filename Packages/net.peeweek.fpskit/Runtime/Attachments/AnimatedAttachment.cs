@@ -8,9 +8,9 @@ namespace FPSKit
         [SerializeField]
         protected Animator animator;
 
-        public override void OnActive(FirstPersonController controller)
+        public override void OnActive()
         {
-            base.OnActive(controller);
+            base.OnActive();
         }
     }
 }

@@ -244,7 +244,7 @@ namespace FPSKit
             else if (input.previousAttachment == ButtonState.JustPressed)
                 PreviousAttachment();
             else 
-                m_CurrentAttachment?.OnUpdate(this);
+                m_CurrentAttachment?.OnUpdate();
 
             // Apply to character   
             m_Move = m_Movement + m_Forces;
@@ -690,7 +690,7 @@ namespace FPSKit
                     if(!active)
                     {
                         kvp.Value.gameObject.SetActive(true);
-                        kvp.Value.OnActive(this);
+                        kvp.Value.OnActive();
                         m_CurrentAttachment = kvp.Value;
                     }
                 }
@@ -698,7 +698,7 @@ namespace FPSKit
                 {
                     if(active)
                     {
-                        kvp.Value.OnInactive(this);
+                        kvp.Value.OnInactive();
                         kvp.Value.gameObject.SetActive(false);
                     }
                 }
@@ -719,8 +719,8 @@ namespace FPSKit
                 {
                     var attachment = m_Attachments[index];
                     m_Attachments.Remove(index);
-                    attachment.OnInactive(this);
-                    attachment.OnDetach(this);
+                    attachment.OnInactive();
+                    attachment.OnDetach();
                     Destroy(attachment.gameObject);
                     return true;
                 }      

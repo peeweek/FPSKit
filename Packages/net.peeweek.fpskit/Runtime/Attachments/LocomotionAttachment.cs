@@ -13,9 +13,9 @@ namespace FPSKit
         [SerializeField]
         string AnimatorAimProperty = "Aim";
 
-        public override void OnUpdate(FirstPersonController controller)
+        public override void OnUpdate()
         {
-            base.OnUpdate(controller);
+            base.OnUpdate();
 
             animator.SetBool(AnimatorDashProperty, controller.dash);
             animator.SetFloat(AnimatorMoveProperty, controller.speed);

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FPSKit
 {
-    public class RigidBodyProjectileSpawner : ProjectileSpawner
+    public class RigidBodyProjectileSpawner : ShotProjectileSpawnerBase
     {
         [SerializeField]
         GameObject referencePrefab;
@@ -61,15 +61,15 @@ namespace FPSKit
             m_AvailableInstances.Clear();
         }
 
-        public override void OnAttach(FirstPersonController controller)
+        public override void OnAttach(FirstPersonController controller, BasicWeaponAttachment attachment)
         {
-            base.OnAttach(controller);
+            base.OnAttach(controller, attachment);
             InitializePool();
         }
 
-        public override void OnDetach(FirstPersonController controller)
+        public override void OnDetach()
         {
-            base.OnDetach(controller);
+            base.OnDetach();
             ClearPool();
         }
 
@@ -90,7 +90,7 @@ namespace FPSKit
                 }
         }
 
-        public override bool Spawn(Ray ray, RaycastHit hit, bool hitTarget)
+        protected override bool Spawn(Ray ray, RaycastHit hit, bool hitTarget)
         {
             if(m_AvailableInstances.Count == 0 && reapOldestInstance)
                 Reap();
